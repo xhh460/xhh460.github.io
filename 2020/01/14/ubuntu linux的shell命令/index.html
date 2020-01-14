@@ -1,0 +1,203 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="John Doe"><meta name="renderer" content="webkit"><meta name="copyright" content="John Doe"><meta name="keywords" content="小灰灰"><meta name="description" content=""><meta name="Cache-Control" content="no-cache"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>ubuntu linux的shell命令 · xhh's Blog</title><link rel="stylesheet" href="/css/style.css?v=2018.7.9"><link rel="stylesheet" href="/css/animation.css?v=2018.7.9"><link rel="icon" href="/img/assets/people1.ico"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.6"><!-- scripts--><script>(function( w ){
+  "use strict";
+  // rel=preload support test
+  if( !w.loadCSS ){
+    w.loadCSS = function(){};
+  }
+  // define on the loadCSS obj
+  var rp = loadCSS.relpreload = {};
+  // rel=preload feature support test
+  // runs once and returns a function for compat purposes
+  rp.support = (function(){
+    var ret;
+    try {
+      ret = w.document.createElement( "link" ).relList.supports( "preload" );
+    } catch (e) {
+      ret = false;
+    }
+    return function(){
+      return ret;
+    };
+  })();
+
+  // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+  // then change that media back to its intended value on load
+  rp.bindMediaToggle = function( link ){
+    // remember existing media attr for ultimate state, or default to 'all'
+    var finalMedia = link.media || "all";
+
+    function enableStylesheet(){
+      link.media = finalMedia;
+    }
+
+    // bind load handlers to enable media
+    if( link.addEventListener ){
+      link.addEventListener( "load", enableStylesheet );
+    } else if( link.attachEvent ){
+      link.attachEvent( "onload", enableStylesheet );
+    }
+
+    // Set rel and non-applicable media type to start an async request
+    // note: timeout allows this to happen async to let rendering continue in IE
+    setTimeout(function(){
+      link.rel = "stylesheet";
+      link.media = "only x";
+    });
+    // also enable media after 3 seconds,
+    // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+    setTimeout( enableStylesheet, 3000 );
+  };
+
+  // loop through link elements in DOM
+  rp.poly = function(){
+    // double check this to prevent external calls from running
+    if( rp.support() ){
+      return;
+    }
+    var links = w.document.getElementsByTagName( "link" );
+    for( var i = 0; i < links.length; i++ ){
+      var link = links[ i ];
+      // qualify links to those with rel=preload and as=style attrs
+      if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+        // prevent rerunning on link
+        link.setAttribute( "data-loadcss", true );
+        // bind listeners to toggle media back
+        rp.bindMediaToggle( link );
+      }
+    }
+  };
+
+  // if unsupported, run the polyfill
+  if( !rp.support() ){
+    // run once at least
+    rp.poly();
+
+    // rerun poly on an interval until onload
+    var run = w.setInterval( rp.poly, 500 );
+    if( w.addEventListener ){
+      w.addEventListener( "load", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    } else if( w.attachEvent ){
+      w.attachEvent( "onload", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    }
+  }
+
+
+  // commonjs
+  if( typeof exports !== "undefined" ){
+    exports.loadCSS = loadCSS;
+  }
+  else {
+    w.loadCSS = loadCSS;
+  }
+}( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/people.png"></div><!--.profile-saying
+  i.fa.fa-comment
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">xiaohuihui</div><div class="profile-signature">for me</div><div class="friends"><div>FRIENDS</div><span><a href="//github.com/" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">xhh's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">ubuntu linux的shell命令</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2020-01-14</span></span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h1 id="Ubuntu-Linux-shell命令"><a href="#Ubuntu-Linux-shell命令" class="headerlink" title="Ubuntu Linux shell命令"></a>Ubuntu Linux shell命令</h1><h3 id="1-认识shell命令"><a href="#1-认识shell命令" class="headerlink" title="1.认识shell命令"></a><strong>1.认识shell命令</strong></h3><ul>
+<li><p>shell命令的一般格式</p>
+</li>
+<li><pre><code class="shell">command [-option] parameter1 parameter2...
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  command为命令的名称</span><br><span class="line"></span><br><span class="line">  [-options]是可选项，是对命令的操作。一般以连字符 - 开始</span><br><span class="line"></span><br><span class="line">  parameter1 parameter2... 为跟在后面的参数(可以是文件，可以是目录)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 进入命令终端 ctrl+alt+T</span><br><span class="line"></span><br><span class="line">- 提取权限：一般默认的权限都是一般用户的权限，所以在执行一些命令或打开一些文件时可能会打不开，原因是其文件或目录的权限太高，非root用户不能执行，所以一般我的习惯都是先对用户进行提权，提权命令为`sudo su`  ，接下来便输入root用户的密码，便可提权。`pwd`命令是显示当前的工作目录。</span><br><span class="line"></span><br><span class="line">  ![image-20200114213018697](C:\Users\Lenovo\AppData\Roaming\Typora\typora-user-images\image-20200114213018697.png)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">- who——查看用户登陆</span><br><span class="line"></span><br><span class="line">- whoami——显示当前操作用户</span><br><span class="line"></span><br><span class="line">- hostname——用来显示或设置系统的主机名</span><br><span class="line"></span><br><span class="line">- dmesg——显示开机信息</span><br><span class="line"></span><br><span class="line">- clear——清除屏幕</span><br><span class="line"></span><br><span class="line">- date——显示当前日期</span><br><span class="line"></span><br><span class="line">- finger——显示主机系统中的用户信息</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### **2.Linux文件及目录查看类命令**</span><br><span class="line"></span><br><span class="line">- 路径与目录：</span><br><span class="line"></span><br><span class="line">  (1)绝对路径：从&quot;/&quot;(根目录)开始的路径，如/usr, /etc/apt等，意思就是它指向系统中的一个绝对的位置。</span><br><span class="line"></span><br><span class="line">  (2)相对路径：相对路径，就不是以正斜线开始，它是从当前所在目录开始，到查找对象（目录或文件）所必须经过的每一个目录的名字。</span><br><span class="line"></span><br><span class="line">- 特殊符号表示的目录</span><br><span class="line"></span><br><span class="line">  | 符号 |     符号所示的目录含义     |</span><br><span class="line">  | :--: | :------------------------: |</span><br><span class="line">  |  .   |   表示用户所处的当前目录   |</span><br><span class="line">  |  ..  |        表示上级目录        |</span><br><span class="line">  |  ~   | 表示当前用户自己的home目录 |</span><br><span class="line"></span><br><span class="line">- cd——改变目录</span><br><span class="line"></span><br><span class="line">  ```shell</span><br><span class="line">  cd [相对路径或绝对路径]</span><br></pre></td></tr></table></figure>
+</code></pre>
+</li>
+</ul>
+<p>例如：<img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200114215254670.png" alt="image-20200114215254670"></p>
+<p>返回上级目录：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200114215429650.png" alt="image-20200114215429650"></p>
+<p>返回登陆用户的主目录：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200114215553764.png" alt="image-20200114215553764"></p>
+<ul>
+<li><p>ls——显示指定目录的清单</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls [参数] [目录或文件名]</span><br></pre></td></tr></table></figure>
+
+<p>一般情况下，我都是用<code>ls -l</code>命令来查看，因为这个命令可以输出文件或目录的详细信息。</p>
+<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200114220046988.png" alt="image-20200114220046988"></p>
+</li>
+</ul>
+<ul>
+<li><p>cat——显示文件的内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat [参数] 文件名</span><br></pre></td></tr></table></figure>
+
+<p>一般用<code>cat -n</code>比较好一点，因为这样可以显示行号</p>
+<p>比如我要查看test1.sh这个文件，有了行号会更加清晰更具可读性。</p>
+<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200114220322777.png" alt="image-20200114220322777"></p>
+</li>
+</ul>
+<ul>
+<li><p>more——逐渐显示文件中的内容</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more 文件名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>file——显示文件或目录的类型</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">file 文件名或目录</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+</li>
+</ul>
+<h3 id="3-Linux文件查找类命令"><a href="#3-Linux文件查找类命令" class="headerlink" title="3.Linux文件查找类命令"></a><strong>3.Linux文件查找类命令</strong></h3><ul>
+<li><p>whereis——查找文件位置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whereis [参数] 文件名或目录</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200114220950994.png" alt="image-20200114220950994"></p>
+</li>
+</ul>
+<p>此方法与<code>locate</code>相似。</p>
+<ul>
+<li><p>locate——查找绝对路径中包含指定字符串的文件</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">locate 字符串或文件名</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="4-Linux文件及目录的创建"><a href="#4-Linux文件及目录的创建" class="headerlink" title="4.Linux文件及目录的创建"></a><strong>4.Linux文件及目录的创建</strong></h3><ul>
+<li><p>touch——生成文件或修改文件的存取时间</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch [参数] 文件名或目录名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mkdir——创建新目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkdir [-m] [-p] 目录名</span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="5-Linux文件及目录的删除"><a href="#5-Linux文件及目录的删除" class="headerlink" title="5.Linux文件及目录的删除"></a><strong>5.Linux文件及目录的删除</strong></h3><ul>
+<li><p>rmdir——删除目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rmdir [-p] 目录名</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>rm——删除文件或目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm [参数] 文件名或目录名</span><br></pre></td></tr></table></figure>
+
+<h3 id="如果目录删除不了的话，一方面是权限的问题，另一方面可以加参数-f强制删除。"><a href="#如果目录删除不了的话，一方面是权限的问题，另一方面可以加参数-f强制删除。" class="headerlink" title="如果目录删除不了的话，一方面是权限的问题，另一方面可以加参数-f强制删除。"></a>如果目录删除不了的话，一方面是权限的问题，另一方面可以加参数<code>-f</code>强制删除。</h3></li>
+</ul>
+<h3 id="6-Linux文件及目录的复制"><a href="#6-Linux文件及目录的复制" class="headerlink" title="6.Linux文件及目录的复制"></a><strong>6.Linux文件及目录的复制</strong></h3><ul>
+<li><p>cp——文件及目录的复制</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp [参数] 原文件或目录 目标文件或目录</span><br></pre></td></tr></table></figure>
+
+<p>-r  递归复制目录，一般可能会用到-r</p>
+</li>
+</ul>
+<h3 id="7-Linux文件及目录的移动"><a href="#7-Linux文件及目录的移动" class="headerlink" title="7.Linux文件及目录的移动"></a><strong>7.Linux文件及目录的移动</strong></h3><ul>
+<li><p>mv——移动文件位置</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv [参数] 源文件或目录 目标文件或目录</span><br></pre></td></tr></table></figure>
+
+<p>-f  不论目标文件或目录是否存在，均不提示。</p>
+</li>
+</ul>
+<h3 id="8-Linux文件及目录的归档，打包"><a href="#8-Linux文件及目录的归档，打包" class="headerlink" title="8.Linux文件及目录的归档，打包"></a><strong>8.Linux文件及目录的归档，打包</strong></h3><ul>
+<li><p>tar </p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar [参数] 文件目录列表</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://yoursite.com">John Doe</a></p><p> <span>Link:  </span><a href="http://yoursite.com/2020/01/14/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/">http://yoursite.com/2020/01/14/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/3.0" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><a class="nextSlogan" href="/2019/11/07/hello-world/" title="Hello World"><span>NextPost ></span><br><span class="nextTitle">Hello World</span></a><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ubuntu-Linux-shell命令"><span class="toc-number">1.</span> <span class="toc-text">Ubuntu Linux shell命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-认识shell命令"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.认识shell命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Linux文件查找类命令"><span class="toc-number">1.0.2.</span> <span class="toc-text">3.Linux文件查找类命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Linux文件及目录的创建"><span class="toc-number">1.0.3.</span> <span class="toc-text">4.Linux文件及目录的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Linux文件及目录的删除"><span class="toc-number">1.0.4.</span> <span class="toc-text">5.Linux文件及目录的删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如果目录删除不了的话，一方面是权限的问题，另一方面可以加参数-f强制删除。"><span class="toc-number">1.0.5.</span> <span class="toc-text">如果目录删除不了的话，一方面是权限的问题，另一方面可以加参数-f强制删除。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Linux文件及目录的复制"><span class="toc-number">1.0.6.</span> <span class="toc-text">6.Linux文件及目录的复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Linux文件及目录的移动"><span class="toc-number">1.0.7.</span> <span class="toc-text">7.Linux文件及目录的移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Linux文件及目录的归档，打包"><span class="toc-number">1.0.8.</span> <span class="toc-text">8.Linux文件及目录的归档，打包</span></a></li></ol></li></ol></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>
