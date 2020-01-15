@@ -97,7 +97,8 @@
   }
 }( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/people.png"></div><!--.profile-saying
   i.fa.fa-comment
-  .saying--><div class="cxo-profile-inner"><div class="profile-name">xiaohuihui</div><div class="profile-signature">for me</div><div class="friends"><div>FRIENDS</div><span><a href="//github.com/" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">xhh's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">ubuntu linux的shell命令</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2020-01-14</span></span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h1 id="Ubuntu-Linux-shell命令"><a href="#Ubuntu-Linux-shell命令" class="headerlink" title="Ubuntu Linux shell命令"></a>Ubuntu Linux shell命令</h1><h3 id="1-认识shell命令"><a href="#1-认识shell命令" class="headerlink" title="1.认识shell命令"></a><strong>1.认识shell命令</strong></h3><ul>
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">xiaohuihui</div><div class="profile-signature">for me</div><div class="friends"><div>FRIENDS</div><span><a href="//github.com/" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">xhh's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">ubuntu linux的shell命令</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2020-01-14</span></span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><p>typora-root-url: images</p>
+<h1 id="Ubuntu-Linux-shell命令"><a href="#Ubuntu-Linux-shell命令" class="headerlink" title="Ubuntu Linux shell命令"></a>Ubuntu Linux shell命令</h1><h3 id="1-认识shell命令"><a href="#1-认识shell命令" class="headerlink" title="1.认识shell命令"></a><strong>1.认识shell命令</strong></h3><ul>
 <li><p>shell命令的一般格式</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command [-option] parameter1 parameter2...</span><br></pre></td></tr></table></figure>
 
@@ -135,7 +136,11 @@
 <p>(2)相对路径：相对路径，就不是以正斜线开始，它是从当前所在目录开始，到查找对象（目录或文件）所必须经过的每一个目录的名字。</p>
 </li>
 <li><p>特殊符号表示的目录</p>
-<table>
+<ul>
+<li><input disabled="" type="checkbox"> <ul>
+<li><input disabled="" type="checkbox"> <ul>
+<li><input disabled="" type="checkbox"> <ul>
+<li><input disabled="" type="checkbox"> <table>
 <thead>
 <tr>
 <th align="center">符号</th>
@@ -155,6 +160,14 @@
 <td align="center">表示当前用户自己的home目录</td>
 </tr>
 </tbody></table>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 <li><p>cd——改变目录</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd [相对路径或绝对路径]</span><br></pre></td></tr></table></figure>
@@ -255,6 +268,27 @@
 <li><p>tar </p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar [参数] 文件目录列表</span><br></pre></td></tr></table></figure>
 
+
+
+
 </li>
 </ul>
-</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://yoursite.com">John Doe</a></p><p> <span>Link:  </span><a href="http://yoursite.com/2020/01/14/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/">http://yoursite.com/2020/01/14/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/3.0" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ubuntu-Linux-shell命令"><span class="toc-number">1.</span> <span class="toc-text">Ubuntu Linux shell命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-认识shell命令"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.认识shell命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Linux文件及目录查看类命令"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.Linux文件及目录查看类命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Linux文件查找类命令"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.Linux文件查找类命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Linux文件及目录的创建"><span class="toc-number">1.0.4.</span> <span class="toc-text">4.Linux文件及目录的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Linux文件及目录的删除"><span class="toc-number">1.0.5.</span> <span class="toc-text">5.Linux文件及目录的删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Linux文件及目录的复制"><span class="toc-number">1.0.6.</span> <span class="toc-text">6.Linux文件及目录的复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Linux文件及目录的移动"><span class="toc-number">1.0.7.</span> <span class="toc-text">7.Linux文件及目录的移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Linux文件及目录的归档，打包"><span class="toc-number">1.0.8.</span> <span class="toc-text">8.Linux文件及目录的归档，打包</span></a></li></ol></li></ol></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>
+<h3 id="9-硬链接与软链接"><a href="#9-硬链接与软链接" class="headerlink" title="9.硬链接与软链接"></a><strong>9.硬链接与软链接</strong></h3><ul>
+<li><p>Linux 链接分两种，一种被称为硬链接（Hard Link），另一种被称为符号链接（Symbolic Link）。默认情况下，<strong>ln</strong> 命令产生硬链接。</p>
+</li>
+<li><p>硬链接可认为是一个文件拥有两个文件名;而软链接则是系统新建一个链接文件，此文件指向其所要指的文件。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln [参数] 源文件或目录名 链接名</span><br></pre></td></tr></table></figure>
+
+<p>参数：-s ，建立符号链接(即软链接)，不加该项时建立的是硬链接。</p>
+</li>
+</ul>
+<h3 id="10-文件重定向"><a href="#10-文件重定向" class="headerlink" title="10.文件重定向"></a><strong>10.文件重定向</strong></h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;     //标准输入重定向</span><br><span class="line"><span class="meta">&gt;</span><span class="bash">     //标准输出重定向   清空原先的内容后添加新的内容 </span></span><br><span class="line"><span class="meta">&gt;</span><span class="bash">&gt;    //标准输出重定向   在原来内容换行下方添加新的内容</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>输出重定向</p>
+<p>linux中用0代表标准输入，1代表标准正确输出，2代表标准错误输出。<br>输出重定向：正常输出是把内容输出到显示器上，而输出重定向是把内容输出到文件中。</p>
+<p><img src="../images/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/8.jpg" alt="8"></p>
+<p>标准<strong>输入</strong>是文件描述符<strong>0</strong>。它是命令的输入，缺省是键盘，也可以是文件或其他命令的输出。<br>标准<strong>输出</strong>是文件描述符<strong>1</strong>。它是命令的输出，缺省是屏幕，也可以是文件。<br>标准<strong>错误</strong>是文件描述符<strong>2</strong>。这是命令错误的输出，缺省是屏幕，同样也可以是文件。</p>
+</li>
+</ul>
+</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://yoursite.com">John Doe</a></p><p> <span>Link:  </span><a href="http://yoursite.com/2020/01/14/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/">http://yoursite.com/2020/01/14/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/3.0" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ubuntu-Linux-shell命令"><span class="toc-number">1.</span> <span class="toc-text">Ubuntu Linux shell命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-认识shell命令"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.认识shell命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Linux文件及目录查看类命令"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.Linux文件及目录查看类命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Linux文件查找类命令"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.Linux文件查找类命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Linux文件及目录的创建"><span class="toc-number">1.0.4.</span> <span class="toc-text">4.Linux文件及目录的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Linux文件及目录的删除"><span class="toc-number">1.0.5.</span> <span class="toc-text">5.Linux文件及目录的删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Linux文件及目录的复制"><span class="toc-number">1.0.6.</span> <span class="toc-text">6.Linux文件及目录的复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Linux文件及目录的移动"><span class="toc-number">1.0.7.</span> <span class="toc-text">7.Linux文件及目录的移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Linux文件及目录的归档，打包"><span class="toc-number">1.0.8.</span> <span class="toc-text">8.Linux文件及目录的归档，打包</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-硬链接与软链接"><span class="toc-number">1.0.9.</span> <span class="toc-text">9.硬链接与软链接</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-文件重定向"><span class="toc-number">1.0.10.</span> <span class="toc-text">10.文件重定向</span></a></li></ol></li></ol></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>
