@@ -99,27 +99,83 @@
   i.fa.fa-comment
   .saying--><div class="cxo-profile-inner"><div class="profile-name">xiaohuihui</div><div class="profile-signature">for me</div><div class="friends"><div>FRIENDS</div><span><a href="//github.com/" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">xhh's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">ubuntu linux的shell命令</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2020-01-14</span></span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h1 id="Ubuntu-Linux-shell命令"><a href="#Ubuntu-Linux-shell命令" class="headerlink" title="Ubuntu Linux shell命令"></a>Ubuntu Linux shell命令</h1><h3 id="1-认识shell命令"><a href="#1-认识shell命令" class="headerlink" title="1.认识shell命令"></a><strong>1.认识shell命令</strong></h3><ul>
 <li><p>shell命令的一般格式</p>
-</li>
-<li><pre><code class="shell">command [-option] parameter1 parameter2...
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  command为命令的名称</span><br><span class="line"></span><br><span class="line">  [-options]是可选项，是对命令的操作。一般以连字符 - 开始</span><br><span class="line"></span><br><span class="line">  parameter1 parameter2... 为跟在后面的参数(可以是文件，可以是目录)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- 进入命令终端 ctrl+alt+T</span><br><span class="line"></span><br><span class="line">- 提取权限：一般默认的权限都是一般用户的权限，所以在执行一些命令或打开一些文件时可能会打不开，原因是其文件或目录的权限太高，非root用户不能执行，所以一般我的习惯都是先对用户进行提权，提权命令为`sudo su`  ，接下来便输入root用户的密码，便可提权。`pwd`命令是显示当前的工作目录。</span><br><span class="line"></span><br><span class="line">  ![1](/../../images/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/1.jpg)</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">- who——查看用户登陆</span><br><span class="line"></span><br><span class="line">- whoami——显示当前操作用户</span><br><span class="line"></span><br><span class="line">- hostname——用来显示或设置系统的主机名</span><br><span class="line"></span><br><span class="line">- dmesg——显示开机信息</span><br><span class="line"></span><br><span class="line">- clear——清除屏幕</span><br><span class="line"></span><br><span class="line">- date——显示当前日期</span><br><span class="line"></span><br><span class="line">- finger——显示主机系统中的用户信息</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### **2.Linux文件及目录查看类命令**</span><br><span class="line"></span><br><span class="line">- 路径与目录：</span><br><span class="line"></span><br><span class="line">  (1)绝对路径：从&quot;/&quot;(根目录)开始的路径，如/usr, /etc/apt等，意思就是它指向系统中的一个绝对的位置。</span><br><span class="line"></span><br><span class="line">  (2)相对路径：相对路径，就不是以正斜线开始，它是从当前所在目录开始，到查找对象（目录或文件）所必须经过的每一个目录的名字。</span><br><span class="line"></span><br><span class="line">- 特殊符号表示的目录</span><br><span class="line"></span><br><span class="line">  | 符号 |     符号所示的目录含义     |</span><br><span class="line">  | :--: | :------------------------: |</span><br><span class="line">  |  .   |   表示用户所处的当前目录   |</span><br><span class="line">  |  ..  |        表示上级目录        |</span><br><span class="line">  |  ~   | 表示当前用户自己的home目录 |</span><br><span class="line"></span><br><span class="line">- cd——改变目录</span><br><span class="line"></span><br><span class="line">  ```shell</span><br><span class="line">  cd [相对路径或绝对路径]</span><br></pre></td></tr></table></figure>
-</code></pre>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">command [-option] parameter1 parameter2...</span><br></pre></td></tr></table></figure>
+
+<p>command为命令的名称</p>
+<p>[-options]是可选项，是对命令的操作。一般以连字符 - 开始</p>
+<p>parameter1 parameter2… 为跟在后面的参数(可以是文件，可以是目录)</p>
 </li>
 </ul>
-<p>例如：<img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200114215254670.png" alt="image-20200114215254670"></p>
+<ul>
+<li><p>进入命令终端 ctrl+alt+T</p>
+</li>
+<li><p>提取权限：一般默认的权限都是一般用户的权限，所以在执行一些命令或打开一些文件时可能会打不开，原因是其文件或目录的权限太高，非root用户不能执行，所以一般我的习惯都是先对用户进行提权，提权命令为<code>sudo su</code>  ，接下来便输入root用户的密码，便可提权。<code>pwd</code>命令是显示当前的工作目录。</p>
+<p><img src="/../../images/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/1.jpg" alt="1"></p>
+</li>
+</ul>
+<ul>
+<li><p>who——查看用户登陆</p>
+</li>
+<li><p>whoami——显示当前操作用户</p>
+</li>
+<li><p>hostname——用来显示或设置系统的主机名</p>
+</li>
+<li><p>dmesg——显示开机信息</p>
+</li>
+<li><p>clear——清除屏幕</p>
+</li>
+<li><p>date——显示当前日期</p>
+</li>
+<li><p>finger——显示主机系统中的用户信息</p>
+</li>
+</ul>
+<h3 id="2-Linux文件及目录查看类命令"><a href="#2-Linux文件及目录查看类命令" class="headerlink" title="2.Linux文件及目录查看类命令"></a><strong>2.Linux文件及目录查看类命令</strong></h3><ul>
+<li><p>路径与目录：</p>
+<p>(1)绝对路径：从”/“(根目录)开始的路径，如/usr, /etc/apt等，意思就是它指向系统中的一个绝对的位置。</p>
+<p>(2)相对路径：相对路径，就不是以正斜线开始，它是从当前所在目录开始，到查找对象（目录或文件）所必须经过的每一个目录的名字。</p>
+</li>
+<li><p>特殊符号表示的目录</p>
+<table>
+<thead>
+<tr>
+<th align="center">符号</th>
+<th align="center">符号所示的目录含义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">.</td>
+<td align="center">表示用户所处的当前目录</td>
+</tr>
+<tr>
+<td align="center">..</td>
+<td align="center">表示上级目录</td>
+</tr>
+<tr>
+<td align="center">~</td>
+<td align="center">表示当前用户自己的home目录</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>cd——改变目录</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd [相对路径或绝对路径]</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>例如：<img src="/../../images/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/2.jpg" alt=""></p>
 <p>返回上级目录：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ..</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200114215429650.png" alt="image-20200114215429650"></p>
+<p><img src="/../../images/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/3.jpg" alt="3"></p>
 <p>返回登陆用户的主目录：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200114215553764.png" alt="image-20200114215553764"></p>
+<p><img src="/../../images/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/4.jpg" alt="4"></p>
 <ul>
 <li><p>ls——显示指定目录的清单</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ls [参数] [目录或文件名]</span><br></pre></td></tr></table></figure>
 
 <p>一般情况下，我都是用<code>ls -l</code>命令来查看，因为这个命令可以输出文件或目录的详细信息。</p>
-<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200114220046988.png" alt="image-20200114220046988"></p>
+<p><img src="/../../images/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/5.jpg" alt="5"></p>
 </li>
 </ul>
 <ul>
@@ -128,7 +184,7 @@
 
 <p>一般用<code>cat -n</code>比较好一点，因为这样可以显示行号</p>
 <p>比如我要查看test1.sh这个文件，有了行号会更加清晰更具可读性。</p>
-<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200114220322777.png" alt="image-20200114220322777"></p>
+<p><img src="/../../images/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/6.jpg" alt="6"></p>
 </li>
 </ul>
 <ul>
@@ -148,7 +204,7 @@
 <li><p>whereis——查找文件位置</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">whereis [参数] 文件名或目录</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:%5CUsers%5CLenovo%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200114220950994.png" alt="image-20200114220950994"></p>
+<p><img src="/../../images/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/7.jpg" alt=""></p>
 </li>
 </ul>
 <p>此方法与<code>locate</code>相似。</p>
@@ -200,4 +256,4 @@
 
 </li>
 </ul>
-</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://yoursite.com">John Doe</a></p><p> <span>Link:  </span><a href="http://yoursite.com/2020/01/14/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/">http://yoursite.com/2020/01/14/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/3.0" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ubuntu-Linux-shell命令"><span class="toc-number">1.</span> <span class="toc-text">Ubuntu Linux shell命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-认识shell命令"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.认识shell命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Linux文件查找类命令"><span class="toc-number">1.0.2.</span> <span class="toc-text">3.Linux文件查找类命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Linux文件及目录的创建"><span class="toc-number">1.0.3.</span> <span class="toc-text">4.Linux文件及目录的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Linux文件及目录的删除"><span class="toc-number">1.0.4.</span> <span class="toc-text">5.Linux文件及目录的删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如果目录删除不了的话，一方面是权限的问题，另一方面可以加参数-f强制删除。"><span class="toc-number">1.0.5.</span> <span class="toc-text">如果目录删除不了的话，一方面是权限的问题，另一方面可以加参数-f强制删除。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Linux文件及目录的复制"><span class="toc-number">1.0.6.</span> <span class="toc-text">6.Linux文件及目录的复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Linux文件及目录的移动"><span class="toc-number">1.0.7.</span> <span class="toc-text">7.Linux文件及目录的移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Linux文件及目录的归档，打包"><span class="toc-number">1.0.8.</span> <span class="toc-text">8.Linux文件及目录的归档，打包</span></a></li></ol></li></ol></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>
+</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://yoursite.com">John Doe</a></p><p> <span>Link:  </span><a href="http://yoursite.com/2020/01/14/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/">http://yoursite.com/2020/01/14/ubuntu%20linux%E7%9A%84shell%E5%91%BD%E4%BB%A4/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/3.0" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Ubuntu-Linux-shell命令"><span class="toc-number">1.</span> <span class="toc-text">Ubuntu Linux shell命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-认识shell命令"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.认识shell命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Linux文件及目录查看类命令"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.Linux文件及目录查看类命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Linux文件查找类命令"><span class="toc-number">1.0.3.</span> <span class="toc-text">3.Linux文件查找类命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Linux文件及目录的创建"><span class="toc-number">1.0.4.</span> <span class="toc-text">4.Linux文件及目录的创建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-Linux文件及目录的删除"><span class="toc-number">1.0.5.</span> <span class="toc-text">5.Linux文件及目录的删除</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如果目录删除不了的话，一方面是权限的问题，另一方面可以加参数-f强制删除。"><span class="toc-number">1.0.6.</span> <span class="toc-text">如果目录删除不了的话，一方面是权限的问题，另一方面可以加参数-f强制删除。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-Linux文件及目录的复制"><span class="toc-number">1.0.7.</span> <span class="toc-text">6.Linux文件及目录的复制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-Linux文件及目录的移动"><span class="toc-number">1.0.8.</span> <span class="toc-text">7.Linux文件及目录的移动</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-Linux文件及目录的归档，打包"><span class="toc-number">1.0.9.</span> <span class="toc-text">8.Linux文件及目录的归档，打包</span></a></li></ol></li></ol></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>
