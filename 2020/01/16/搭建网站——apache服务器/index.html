@@ -157,7 +157,9 @@
 <p><img src="/images/%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99%E2%80%94%E2%80%94apache%E6%9C%8D%E5%8A%A1%E5%99%A8/4.jpg" alt="4"></p>
 </li>
 </ul>
-<p>然后复制一下配置文件：</p>
+<p>打开<code>/etc/apache2/ports.conf</code>文件进行配置，把端口改为8080。</p>
+<p><img src="/images/%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99%E2%80%94%E2%80%94apache%E6%9C%8D%E5%8A%A1%E5%99%A8/7.jpg" alt="7"></p>
+<p>然后复制以下配置文件：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp  /etc/apache2/sites-available/default /etc/apache2/sites-available/ip1</span><br></pre></td></tr></table></figure>
 
 <p>然后我们编辑<code>/etc/apache2/sites-available/ip1</code>此文件：</p>
