@@ -165,7 +165,7 @@
 <p>然后我们编辑<code>/etc/apache2/sites-available/ip1</code>此文件：</p>
 <p><img src="/images/%E6%90%AD%E5%BB%BA%E7%BD%91%E7%AB%99%E2%80%94%E2%80%94apache%E6%9C%8D%E5%8A%A1%E5%99%A8/5.jpg" alt="5"></p>
 <p>然后软链接该文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s  /etc/apache2/sites-available/ip1 /etc/apache2/enabled/ip1</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ln -s  /etc/apache2/sites-available/ip1 /etc/apache2/sites-enabled/ip1</span><br></pre></td></tr></table></figure>
 
 <p>启用虚拟主机配置</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a2ensite ip1</span><br></pre></td></tr></table></figure>
