@@ -1,0 +1,159 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="小灰灰"><meta name="renderer" content="webkit"><meta name="copyright" content="小灰灰"><meta name="keywords" content="小灰灰"><meta name="description" content=""><meta name="Cache-Control" content="no-cache"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>Kali渗透测试 · xhh's Blog</title><link rel="stylesheet" href="/css/style.css?v=2018.7.9"><link rel="stylesheet" href="/css/animation.css?v=2018.7.9"><link rel="icon" href="/img/assets/people1.ico"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.6"><!-- scripts--><script>(function( w ){
+  "use strict";
+  // rel=preload support test
+  if( !w.loadCSS ){
+    w.loadCSS = function(){};
+  }
+  // define on the loadCSS obj
+  var rp = loadCSS.relpreload = {};
+  // rel=preload feature support test
+  // runs once and returns a function for compat purposes
+  rp.support = (function(){
+    var ret;
+    try {
+      ret = w.document.createElement( "link" ).relList.supports( "preload" );
+    } catch (e) {
+      ret = false;
+    }
+    return function(){
+      return ret;
+    };
+  })();
+
+  // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+  // then change that media back to its intended value on load
+  rp.bindMediaToggle = function( link ){
+    // remember existing media attr for ultimate state, or default to 'all'
+    var finalMedia = link.media || "all";
+
+    function enableStylesheet(){
+      link.media = finalMedia;
+    }
+
+    // bind load handlers to enable media
+    if( link.addEventListener ){
+      link.addEventListener( "load", enableStylesheet );
+    } else if( link.attachEvent ){
+      link.attachEvent( "onload", enableStylesheet );
+    }
+
+    // Set rel and non-applicable media type to start an async request
+    // note: timeout allows this to happen async to let rendering continue in IE
+    setTimeout(function(){
+      link.rel = "stylesheet";
+      link.media = "only x";
+    });
+    // also enable media after 3 seconds,
+    // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+    setTimeout( enableStylesheet, 3000 );
+  };
+
+  // loop through link elements in DOM
+  rp.poly = function(){
+    // double check this to prevent external calls from running
+    if( rp.support() ){
+      return;
+    }
+    var links = w.document.getElementsByTagName( "link" );
+    for( var i = 0; i < links.length; i++ ){
+      var link = links[ i ];
+      // qualify links to those with rel=preload and as=style attrs
+      if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+        // prevent rerunning on link
+        link.setAttribute( "data-loadcss", true );
+        // bind listeners to toggle media back
+        rp.bindMediaToggle( link );
+      }
+    }
+  };
+
+  // if unsupported, run the polyfill
+  if( !rp.support() ){
+    // run once at least
+    rp.poly();
+
+    // rerun poly on an interval until onload
+    var run = w.setInterval( rp.poly, 500 );
+    if( w.addEventListener ){
+      w.addEventListener( "load", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    } else if( w.attachEvent ){
+      w.attachEvent( "onload", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    }
+  }
+
+
+  // commonjs
+  if( typeof exports !== "undefined" ){
+    exports.loadCSS = loadCSS;
+  }
+  else {
+    w.loadCSS = loadCSS;
+  }
+}( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/people.png"></div><!--.profile-saying
+  i.fa.fa-comment
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">xiaohuihui</div><div class="profile-signature">for me</div><div class="friends"><div>FRIENDS</div><span><a href="//github.com/" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">xhh's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">Kali渗透测试</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2020-02-27 15:41:58</span></span></div><div class="post-intro-read"><span> Word count: <span class="post-count">1.1k</span> | Reading time: <span class="post-count">3</span>min</span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h1 id="Kali渗透探测"><a href="#Kali渗透探测" class="headerlink" title="Kali渗透探测"></a>Kali渗透探测</h1><h3 id="1-渗透探测第一步——情报收集"><a href="#1-渗透探测第一步——情报收集" class="headerlink" title="1.渗透探测第一步——情报收集"></a>1.渗透探测第一步——情报收集</h3><p>首先我们用的工具是Kali自带的一款工具——nmap，nmap是一个网络连接端扫描软件，用来扫描网上电脑开放的网络连接端。确定哪些服务运行在哪些连接端，并且推断计算机运行哪个操作系统（这是亦称fingerprinting）。它是网络管理员必用的软件之一，以及用以评估网络系统安全。</p>
+<p>介绍一下它的命令以及带参数的介绍：</p>
+<h5 id="1-1"><a href="#1-1" class="headerlink" title="1.1"></a>1.1</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap [ip]    //扫描一个ip的所有信息</span><br></pre></td></tr></table></figure>
+
+<p>关于要扫描的ip地址，我们就用网上找的一家公司吧</p>
+<p><img src="/images/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/1.jpg" alt=""></p>
+<p>进行nmap扫描：<img src="/images/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/2.jpg" alt=""></p>
+<p>我们针对与这个ip扫描，可以看到很多这个主机的信息，开放了哪些端口，它的状态以及它的服务，在此我介绍一下它的状态(state)：Nmap输出的是扫描目标的列表，以及每个目标的补充信息，至于是哪些信息则依赖于所使用的选项。 “所感兴趣的端口表格”是其中的关键。那张表列出端口号，协议，服务名称和状态。状态可能是 <code>open</code>(开放的)，<code>filtered</code>(被过滤的)， <code>closed</code>(关闭的)，或者<code>unfiltered</code>(未被过滤的)。 Open(开放的)意味着目标机器上的应用程序正在该端口监听连接/报文。 <code>filtered</code>(被过滤的) 意味着防火墙，过滤器或者其它网络障碍阻止了该端口被访问，Nmap无法得知 它是 <code>open</code>(开放的) 还是 <code>closed</code>(关闭的)。 <code>closed</code>(关闭的) 端口没有应用程序在它上面监听，但是他们随时可能开放。 当端口对Nmap的探测做出响应，但是Nmap无法确定它们是关闭还是开放时，这些端口就被认为是 <code>unfiltered</code>(未被过滤的) 如果Nmap报告状态组合 <code>open|filtered</code> 和 <code>closed|filtered</code>时，那说明Nmap无法确定该端口处于两个状态中的哪一个状态。 当要求进行版本探测时，端口表也可以包含软件的版本信息。当要求进行IP协议扫描时 (<code>-sO</code>)，Nmap提供关于所支持的IP协议而不是正在监听的端口的信息。</p>
+<h5 id="1-2"><a href="#1-2" class="headerlink" title="1.2"></a>1.2</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP [网段]           //扫描在此网段内有哪些主机存活</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/3.jpg" alt=""></p>
+<h5 id="1-3"><a href="#1-3" class="headerlink" title="1.3"></a>1.3</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">namp -p80 -iR [需要扫描的次数]        //利用端口扫描ip</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/4.jpg" alt=""></p>
+<p><img src="/images/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/4_1.jpg" alt=""></p>
+<h5 id="1-4"><a href="#1-4" class="headerlink" title="1.4"></a>1.4</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sS [伪造ip] [ip]      //伪造ip进行扫描</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/5.jpg" alt=""></p>
+<h5 id="1-5"><a href="#1-5" class="headerlink" title="1.5"></a>1.5</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -e [网卡名] [ip]    //选择一张网卡进行扫描</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/6.jpg" alt=""></p>
+<h5 id="1-7"><a href="#1-7" class="headerlink" title="1.7"></a>1.7</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap --spoof-mac [伪造的mac地址] [ip]    //伪造mac地址进行扫描</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/7.jpg" alt=""></p>
+<p>可能对这个ip扫描的次数过多,对方拒绝了我们的访问，只能换下一个地址了。</p>
+<h5 id="1-8"><a href="#1-8" class="headerlink" title="1.8"></a>1.8</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A [ip]    //判断操作系统数据库</span><br></pre></td></tr></table></figure>
+
+<p>扫描的比较慢，就不作列出。</p>
+<h5 id="1-9"><a href="#1-9" class="headerlink" title="1.9"></a>1.9</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -p [端口号-端口号] [ip]  //确定扫描端口范围</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/8.jpg" alt=""></p>
+<h5 id="1-10"><a href="#1-10" class="headerlink" title="1.10"></a>1.10</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -n -sP [网段]     //扫描存活的ip   无图</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h5 id="1-11"><a href="#1-11" class="headerlink" title="1.11"></a>1.11</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sP -oG [文件名] [网段]    //将此网段内扫描出来的ip地址保存成一个文件</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/9_1.jpg" alt=""></p>
+<p><img src="/images/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/9_2.jpg" alt=""></p>
+<h5 id="1-12"><a href="#1-12" class="headerlink" title="1.12"></a>1.12</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -A -n -iL [存放IP地址的文件名]   //将文件中的ip逐个进行扫描</span><br></pre></td></tr></table></figure>
+
+<p>与1.11性质差不多 不作列出</p>
+<h5 id="1-13"><a href="#1-13" class="headerlink" title="1.13"></a>1.13</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sS [ip]     //使用半链接的方式扫描,不断的消耗服务器的资源</span><br></pre></td></tr></table></figure>
+
+<p>这个半链接方式也比较危险，也不作列出，基于半链接我讲一下它的原理。在http协议中,tcp三次握手中,客户端向服务端发出一个request（SYN），然后服务器收到客户端的请求之后，replay（SYN,ACK）给客户端，最后一步是客户端收到了服务端的replay（SYN，ACK）后，再发送给服务端request（ACK）。这就是TCP三次握手的原理。然后半链接的话，没有发出第三次握手给服务端（ACK），让服务端一直处于等待接收的状态，而客户端不仅没有发出第三次握手（ACK），而是不断的发送第一次握手，不断消耗服务器资源，从而导致奔溃。</p>
+<h5 id="1-14"><a href="#1-14" class="headerlink" title="1.14"></a>1.14</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sT [ip]   //全链接,完成了tcp三次握手才判断的，要比半链接慢</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h5 id="1-15"><a href="#1-15" class="headerlink" title="1.15"></a>1.15</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sU --reason [ip]     //扫描UDP端口</span><br></pre></td></tr></table></figure>
+
+</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://yoursite.com">小灰灰</a></p><p> <span>Link:  </span><a href="http://yoursite.com/2020/02/27/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">http://yoursite.com/2020/02/27/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/3.0" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><a class="nextSlogan" href="/2020/02/24/PHP%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92/" title="PHP与数据库交互"><span>NextPost ></span><br><span class="nextTitle">PHP与数据库交互</span></a><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Kali渗透探测"><span class="toc-number">1.</span> <span class="toc-text">Kali渗透探测</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-渗透探测第一步——情报收集"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.渗透探测第一步——情报收集</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1"><span class="toc-number">1.0.1.0.1.</span> <span class="toc-text">1.1</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-2"><span class="toc-number">1.0.1.0.2.</span> <span class="toc-text">1.2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-3"><span class="toc-number">1.0.1.0.3.</span> <span class="toc-text">1.3</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-4"><span class="toc-number">1.0.1.0.4.</span> <span class="toc-text">1.4</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-5"><span class="toc-number">1.0.1.0.5.</span> <span class="toc-text">1.5</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-7"><span class="toc-number">1.0.1.0.6.</span> <span class="toc-text">1.7</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-8"><span class="toc-number">1.0.1.0.7.</span> <span class="toc-text">1.8</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-9"><span class="toc-number">1.0.1.0.8.</span> <span class="toc-text">1.9</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-10"><span class="toc-number">1.0.1.0.9.</span> <span class="toc-text">1.10</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-11"><span class="toc-number">1.0.1.0.10.</span> <span class="toc-text">1.11</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-12"><span class="toc-number">1.0.1.0.11.</span> <span class="toc-text">1.12</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-13"><span class="toc-number">1.0.1.0.12.</span> <span class="toc-text">1.13</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-14"><span class="toc-number">1.0.1.0.13.</span> <span class="toc-text">1.14</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#1-15"><span class="toc-number">1.0.1.0.14.</span> <span class="toc-text">1.15</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i></body></html>
