@@ -1,0 +1,148 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="小灰灰"><meta name="renderer" content="webkit"><meta name="copyright" content="小灰灰"><meta name="keywords" content="小灰灰"><meta name="description" content=""><meta name="Cache-Control" content="no-cache"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>容器和依赖注入 · xhh's Blog</title><link rel="stylesheet" href="/css/style.css?v=2018.7.9"><link rel="stylesheet" href="/css/animation.css?v=2018.7.9"><link rel="icon" href="/img/assets/people1.ico"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.6"><!-- scripts--><script>(function( w ){
+  "use strict";
+  // rel=preload support test
+  if( !w.loadCSS ){
+    w.loadCSS = function(){};
+  }
+  // define on the loadCSS obj
+  var rp = loadCSS.relpreload = {};
+  // rel=preload feature support test
+  // runs once and returns a function for compat purposes
+  rp.support = (function(){
+    var ret;
+    try {
+      ret = w.document.createElement( "link" ).relList.supports( "preload" );
+    } catch (e) {
+      ret = false;
+    }
+    return function(){
+      return ret;
+    };
+  })();
+
+  // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+  // then change that media back to its intended value on load
+  rp.bindMediaToggle = function( link ){
+    // remember existing media attr for ultimate state, or default to 'all'
+    var finalMedia = link.media || "all";
+
+    function enableStylesheet(){
+      link.media = finalMedia;
+    }
+
+    // bind load handlers to enable media
+    if( link.addEventListener ){
+      link.addEventListener( "load", enableStylesheet );
+    } else if( link.attachEvent ){
+      link.attachEvent( "onload", enableStylesheet );
+    }
+
+    // Set rel and non-applicable media type to start an async request
+    // note: timeout allows this to happen async to let rendering continue in IE
+    setTimeout(function(){
+      link.rel = "stylesheet";
+      link.media = "only x";
+    });
+    // also enable media after 3 seconds,
+    // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+    setTimeout( enableStylesheet, 3000 );
+  };
+
+  // loop through link elements in DOM
+  rp.poly = function(){
+    // double check this to prevent external calls from running
+    if( rp.support() ){
+      return;
+    }
+    var links = w.document.getElementsByTagName( "link" );
+    for( var i = 0; i < links.length; i++ ){
+      var link = links[ i ];
+      // qualify links to those with rel=preload and as=style attrs
+      if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+        // prevent rerunning on link
+        link.setAttribute( "data-loadcss", true );
+        // bind listeners to toggle media back
+        rp.bindMediaToggle( link );
+      }
+    }
+  };
+
+  // if unsupported, run the polyfill
+  if( !rp.support() ){
+    // run once at least
+    rp.poly();
+
+    // rerun poly on an interval until onload
+    var run = w.setInterval( rp.poly, 500 );
+    if( w.addEventListener ){
+      w.addEventListener( "load", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    } else if( w.attachEvent ){
+      w.attachEvent( "onload", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    }
+  }
+
+
+  // commonjs
+  if( typeof exports !== "undefined" ){
+    exports.loadCSS = loadCSS;
+  }
+  else {
+    w.loadCSS = loadCSS;
+  }
+}( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/people.png"></div><!--.profile-saying
+  i.fa.fa-comment
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">xiaohuihui</div><div class="profile-signature">for me</div><div class="friends"><div>FRIENDS</div><span><a href="//www.cnblogs.com/lc-snail/" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">xhh's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">容器和依赖注入</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2020-03-29 14:07:03</span></span></div><div class="post-intro-read"><span> Word count: <span class="post-count">1.2k</span> | Reading time: <span class="post-count">4</span>min</span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h1 id="PHP容器和依赖注入"><a href="#PHP容器和依赖注入" class="headerlink" title="PHP容器和依赖注入"></a>PHP容器和依赖注入</h1><h3 id="1-依赖注入"><a href="#1-依赖注入" class="headerlink" title="1.依赖注入"></a>1.依赖注入</h3><p>什么是依赖注入?   依赖注入（DI）是一种设计模式，它可以消除编程代码之间的依赖性，因此可以很容易地管理和测试应用程序。在编程中，依赖注入是一种实现控制反转且用于解决依赖性问题的设计模式。一个依赖关系指的是可被利用的一种对象 。依赖注入是将所依赖的传递给将要使用的从属对象。该服务将会变成客户端状态的一部分并传递服务给客户端，而不允许客户端来建立或寻找服务。依赖注入使我们的编程代码变得松散耦合，易于管理。</p>
+<p>在我们使用框架的同时，框架多多少少都用到了依赖注入来处理类与类之间的依赖关系。</p>
+<p>Class A中用到了Class B的对象b，一般情况下，需要在A的代码中显式的new一个B的对象。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $b = <span class="keyword">new</span> B();</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样做是不可取的，因为这样的话，A与B就耦合在了一起，也就是说A类无法脱离B类工作。</p>
+<p>第二种方法:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">(B $b)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;    </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>第二种方法不必与B类捆绑在一起，只要传入的类满足A类的需求，也可以是C类，也可以是D类，但是如果A类的依赖较多，参数列表会很长，造成混乱，可读性也会变低 .</p>
+<p>第三种方法:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setB</span><span class="params">(B $b)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;b = $b;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;     </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>第三种方法就是使用set方式传入,但是当依赖的类增多的时候,我们会创建很多set方法,所以这个时候便用到了我们容器的概念,容器的话也可以理解为对象树,它的作用是来帮我们管理这些依赖.</p>
+<p>而采用了容器依赖注入技术之后，A的代码只需要定义一个私有的B对象，不需要直接new来获得这个对象，而是通过相关的容器控制程序来将B对象在外部new出来并注入到A类里的引用中。而具体获取的方法、对象被获取时的状态由配置文件（如XML）来指定。</p>
+<p>把有依赖关系的类放到容器中，解析出这些类的实例，就是依赖注入。目的是实现类的解耦。</p>
+<h3 id="2-容器与依赖注入"><a href="#2-容器与依赖注入" class="headerlink" title="2.容器与依赖注入"></a>2.容器与依赖注入</h3><p>以下将由thinkphp5.1框架来实现依赖注入,然而thinkphp框架里面本来就用了容器与依赖注入,目前我们实现这个,只是为了便于理解.</p>
+<ul>
+<li><p>在thinkphp框架中,我们访问一个URL的时候,最终都将返回控制器,由控制器里面的方法执行,首先,我在application文件下创建了admin模块,在admin模块下创建了Demo1控制器,在里面创建了getName方法,</p>
+<p>访问的时候也将由一下格式访问:</p>
+<p><img src="/images/%E5%AE%B9%E5%99%A8%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/%7B%7B%5DWMAMTZ67UG7Y_@TOEN%252.png" alt=""></p>
+</li>
+</ul>
+<p><img src="/images/%E5%AE%B9%E5%99%A8%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/image-20200329145348296.png" alt=""></p>
+<p>我们可以通过GET方式将数据传到控制器指定的方法中,但是只能传字符串,数值</p>
+<p><img src="/images/%E5%AE%B9%E5%99%A8%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/image-20200329145506389.png" alt=""></p>
+<ul>
+<li><p>当我们要传入一个对象到getName方法中,我们该如何传,我们将用依赖注入:向类中传入对象.</p>
+<p>在application文件夹下建一个common(随意名称)文件夹中建个php文件,例子中为Temp.php文件.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">app</span>\<span class="title">common</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Temp</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $name;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($name=<span class="string">'Peter'</span>)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;name = $name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setName</span><span class="params">($name)</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;name = $name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getName</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'方法是: '</span>.<span class="keyword">__METHOD__</span>.<span class="string">'属性是:'</span>.<span class="keyword">$this</span>-&gt;name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后我们返回Demo1控制器,新建getMethod方法,实现依赖注入:向类中注入$temp对象.</p>
+<p><img src="/images/%E5%AE%B9%E5%99%A8%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/image-20200329150817223.png" alt=""></p>
+</li>
+</ul>
+<p>以上代码的$temp-&gt;setName指调用Temp类的setName方法,并传递参数php中文网.其中的类的实例化已经在括号所进行了.</p>
+<p>输出结果如下:</p>
+<p><img src="/images/%E5%AE%B9%E5%99%A8%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/image-20200329151528264.png" alt=""></p>
+<ul>
+<li><p>将一个类绑定到容器中:</p>
+<p><img src="/images/%E5%AE%B9%E5%99%A8%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/3.png" alt=""></p>
+</li>
+</ul>
+<p>这样的话,当我们需要的时候,直接把对象取出来用,因为类已经被实例化.</p>
+<p>输出:</p>
+<p><img src="/images/%E5%AE%B9%E5%99%A8%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/4.png" alt=""></p>
+<p>方法还是那个方法,而$name由我们自定义.</p>
+<p>总结:Class Demo1中用到了Class Temp的对象$temp，一般情况下，需要在Class Demo1的代码中显式的new一个Class Temp的对象。采用依赖注入技术之后，Class Demo1的代码只需要定义一个私有的Class Temp对象，不需要直接new来获得这个对象，而是通过相关的容器控制程序来将B对象在外部new出来并注入到A类里的引用中。而具体获取的方法、对象被获取时的状态由配置文件（如XML）来指定。</p>
+</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://yoursite.com">小灰灰</a></p><p> <span>Link:  </span><a href="http://yoursite.com/2020/03/29/%E5%AE%B9%E5%99%A8%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/">http://yoursite.com/2020/03/29/%E5%AE%B9%E5%99%A8%E5%92%8C%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/3.0" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><a class="nextSlogan" href="/2020/03/27/PHP%E7%BB%8F%E5%85%B8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" title="PHP经典设计模式"><span>NextPost ></span><br><span class="nextTitle">PHP经典设计模式</span></a><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PHP容器和依赖注入"><span class="toc-number">1.</span> <span class="toc-text">PHP容器和依赖注入</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-依赖注入"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.依赖注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-容器与依赖注入"><span class="toc-number">1.0.2.</span> <span class="toc-text">2.容器与依赖注入</span></a></li></ol></li></ol></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>
