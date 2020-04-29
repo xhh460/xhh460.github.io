@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="小灰灰"><meta name="renderer" content="webkit"><meta name="copyright" content="小灰灰"><meta name="keywords" content="小灰灰"><meta name="description" content=""><meta name="Cache-Control" content="no-cache"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>动态链表 · xhh's Blog</title><link rel="stylesheet" href="/css/style.css?v=2018.7.9"><link rel="stylesheet" href="/css/animation.css?v=2018.7.9"><link rel="icon" href="/img/assets/people1.ico"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.6"><!-- scripts--><script>(function( w ){
+  "use strict";
+  // rel=preload support test
+  if( !w.loadCSS ){
+    w.loadCSS = function(){};
+  }
+  // define on the loadCSS obj
+  var rp = loadCSS.relpreload = {};
+  // rel=preload feature support test
+  // runs once and returns a function for compat purposes
+  rp.support = (function(){
+    var ret;
+    try {
+      ret = w.document.createElement( "link" ).relList.supports( "preload" );
+    } catch (e) {
+      ret = false;
+    }
+    return function(){
+      return ret;
+    };
+  })();
+
+  // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+  // then change that media back to its intended value on load
+  rp.bindMediaToggle = function( link ){
+    // remember existing media attr for ultimate state, or default to 'all'
+    var finalMedia = link.media || "all";
+
+    function enableStylesheet(){
+      link.media = finalMedia;
+    }
+
+    // bind load handlers to enable media
+    if( link.addEventListener ){
+      link.addEventListener( "load", enableStylesheet );
+    } else if( link.attachEvent ){
+      link.attachEvent( "onload", enableStylesheet );
+    }
+
+    // Set rel and non-applicable media type to start an async request
+    // note: timeout allows this to happen async to let rendering continue in IE
+    setTimeout(function(){
+      link.rel = "stylesheet";
+      link.media = "only x";
+    });
+    // also enable media after 3 seconds,
+    // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+    setTimeout( enableStylesheet, 3000 );
+  };
+
+  // loop through link elements in DOM
+  rp.poly = function(){
+    // double check this to prevent external calls from running
+    if( rp.support() ){
+      return;
+    }
+    var links = w.document.getElementsByTagName( "link" );
+    for( var i = 0; i < links.length; i++ ){
+      var link = links[ i ];
+      // qualify links to those with rel=preload and as=style attrs
+      if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+        // prevent rerunning on link
+        link.setAttribute( "data-loadcss", true );
+        // bind listeners to toggle media back
+        rp.bindMediaToggle( link );
+      }
+    }
+  };
+
+  // if unsupported, run the polyfill
+  if( !rp.support() ){
+    // run once at least
+    rp.poly();
+
+    // rerun poly on an interval until onload
+    var run = w.setInterval( rp.poly, 500 );
+    if( w.addEventListener ){
+      w.addEventListener( "load", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    } else if( w.attachEvent ){
+      w.attachEvent( "onload", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    }
+  }
+
+
+  // commonjs
+  if( typeof exports !== "undefined" ){
+    exports.loadCSS = loadCSS;
+  }
+  else {
+    w.loadCSS = loadCSS;
+  }
+}( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/people.png"></div><!--.profile-saying
+  i.fa.fa-comment
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">xiaohuihui</div><div class="profile-signature">for me</div><div class="friends"><div>FRIENDS</div><span><a href="//www.cnblogs.com/lc-snail/" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">xhh's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">动态链表</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2020-04-29 16:20:48</span></span></div><div class="post-intro-read"><span> Word count: <span class="post-count">977</span> | Reading time: <span class="post-count">3</span>min</span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h1 id="数据结构之动态链表"><a href="#数据结构之动态链表" class="headerlink" title="数据结构之动态链表"></a>数据结构之动态链表</h1><h4 id="链表的概念"><a href="#链表的概念" class="headerlink" title="链表的概念"></a>链表的概念</h4><p>逻辑结构上一个挨一个的数据，在实际存储时，并没有像顺序表那样也相互紧挨着。恰恰相反，数据随机分布在内存中的各个位置，这种存储结构称为线性表的链式存储。</p>
+<p>链表和数组的作用相同，都是用来存储数据。数组在C语言中是一种很常见的数据结构,它是用来存储数据的,但是数组是一次分配完全部内存，而链表则是在需要时再分配内存，每次只分配出一个节点(Node)的内存，链表是由多个节点组成的，而每个节点都有俩个部分：数据区和指针区。</p>
+<p>数据区：数据区是用来存储数据。</p>
+<p>指针区：指针区是用来存储指向下一节点的指针。</p>
+<p>链表:</p>
+<p><img src="/images/%E5%8A%A8%E6%80%81%E9%93%BE%E8%A1%A8/image-20200429200300956.png" alt="image-20200429200300956"></p>
+<p>头指针：永远指向链表中第一个结点的位置（如果链表有头结点，头指针指向头结点；否则，头指针指向首元结点）。</p>
+<p>首元结点：链表中第一个元素所在的结点，它是头结点后边的第一个结点。即图中第二部分图形。</p>
+<p>头结点：有时，在链表的第一个结点之前会额外增设一个结点，结点的数据域一般不存放数据（有些情况下也可以存放链表的长度等信息），此结点被称为头结点。但此图没有定义头节点。</p>
+<p>单链表中可以没有头结点，但是不能没有头指针，头指针是必须的。</p>
+<p>一般有头节点的链表是这样的：</p>
+<p><img src="/images/%E5%8A%A8%E6%80%81%E9%93%BE%E8%A1%A8/image-20200429201707279.png" alt="image-20200429201707279"></p>
+<h4 id="向链表中加入节点"><a href="#向链表中加入节点" class="headerlink" title="向链表中加入节点"></a>向链表中加入节点</h4><p>有三种方法:</p>
+<ol>
+<li>插入到链表的头部，也就是头结点和首元结点中间；</li>
+<li>插入到链表中间的某个位置；</li>
+<li>插入到链表最末端；</li>
+</ol>
+<p>下方代码为第一种插入方式:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span>     <span class="comment">//定义结构体</span></span><br><span class="line">	<span class="keyword">int</span> data;     <span class="comment">//数据域</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">next</span>;</span>    <span class="comment">//定义指向结构体变量的指针next       指针域</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建列表(创建链表结构体指针)</span></span><br><span class="line"><span class="function">struct Node* <span class="title">createList</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//头节点指针动态申请内存变为头节点结构体变量</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">headNode</span> = (<span class="title">struct</span> <span class="title">Node</span>*)<span class="title">malloc</span>(<span class="title">sizeof</span>(<span class="title">struct</span> <span class="title">Node</span>));</span> <span class="comment">//malloc函数用于动态内存分配</span></span><br><span class="line">	<span class="comment">//headNode成为了结构体变量</span></span><br><span class="line">	headNode-&gt;next = <span class="literal">NULL</span>;    <span class="comment">//节点为NULL表示是尾节点</span></span><br><span class="line">	<span class="keyword">return</span> headNode;         <span class="comment">//返回链表表头</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建节点(创建结构体节点指针)</span></span><br><span class="line"><span class="function">struct Node* <span class="title">createNode</span><span class="params">(<span class="keyword">int</span> data)</span>   <span class="comment">//要传参数-数据域</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//新节点指针动态申请内存变为新节点结构体变量</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">newNode</span> = (<span class="title">struct</span> <span class="title">Node</span>*)<span class="title">malloc</span>(<span class="title">sizeof</span>(<span class="title">struct</span> <span class="title">Node</span>));</span></span><br><span class="line">	newNode-&gt;data = data;        <span class="comment">//结构体变量里的data给形参 即数据域</span></span><br><span class="line">	newNode-&gt;next = <span class="literal">NULL</span>;    </span><br><span class="line">	<span class="keyword">return</span> newNode;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//打印节点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">printList</span><span class="params">(struct Node* headNode)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">pMove</span> = <span class="title">headNode</span>-&gt;<span class="title">next</span>;</span>      </span><br><span class="line">	<span class="keyword">while</span> (pMove) </span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"%d"</span>, pMove-&gt;data);     <span class="comment">//走一节点打印一节点 即遍历一节点</span></span><br><span class="line">		pMove = pMove-&gt;next;      <span class="comment">//走一节点,指向下一节点</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//表头法插入节点     参数用来判断,你要插入哪个链表,插入节点的数据是多少   以头指针判断</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertNodeByHead</span><span class="params">(struct Node* headNode, <span class="keyword">int</span> data)</span>   </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//1.创建插入的节点</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">newNode</span> = <span class="title">createNode</span>(<span class="title">data</span>);</span></span><br><span class="line">	<span class="comment">//newNode为要插入头节点后的节点,所以就取代了第二个节点的位置所以newNode的下一节点就指向了原来第二节点</span></span><br><span class="line">	newNode-&gt;next = headNode-&gt;next;     </span><br><span class="line">	headNode-&gt;next = newNode;           </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">//创建链表结构体指针</span></span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">Node</span>* <span class="title">list</span> = <span class="title">createList</span>();</span>     <span class="comment">//调用写好的结构体链表指针赋值给结构体指针list </span></span><br><span class="line">	insertNodeByHead(<span class="built_in">list</span>, <span class="number">1</span>);</span><br><span class="line">	insertNodeByHead(<span class="built_in">list</span>, <span class="number">2</span>);      <span class="comment">//给链表插入节点数据</span></span><br><span class="line">	insertNodeByHead(<span class="built_in">list</span>, <span class="number">3</span>);</span><br><span class="line">	printList(<span class="built_in">list</span>);     <span class="comment">//调用打印列表的函数输出</span></span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>打印结果:</p>
+<p><img src="/images/%E5%8A%A8%E6%80%81%E9%93%BE%E8%A1%A8/image-20200429201441031.png" alt=""></p>
+<p>因为是顺序插入的,所以3在最前面。</p>
+</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://yoursite.com">小灰灰</a></p><p> <span>Link:  </span><a href="http://yoursite.com/2020/04/29/%E5%8A%A8%E6%80%81%E9%93%BE%E8%A1%A8/">http://yoursite.com/2020/04/29/%E5%8A%A8%E6%80%81%E9%93%BE%E8%A1%A8/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/3.0" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><a class="nextSlogan" href="/2020/04/25/C%E6%8C%87%E9%92%88/" title="C指针"><span>NextPost ></span><br><span class="nextTitle">C指针</span></a><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#数据结构之动态链表"><span class="toc-number">1.</span> <span class="toc-text">数据结构之动态链表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#链表的概念"><span class="toc-number">1.0.0.1.</span> <span class="toc-text">链表的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#向链表中加入节点"><span class="toc-number">1.0.0.2.</span> <span class="toc-text">向链表中加入节点</span></a></li></ol></li></ol></li></ol></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>
