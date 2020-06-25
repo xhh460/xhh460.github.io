@@ -97,7 +97,44 @@
   }
 }( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/people.png"></div><!--.profile-saying
   i.fa.fa-comment
-  .saying--><div class="cxo-profile-inner"><div class="profile-name">xiaohuihui</div><div class="profile-signature">for me</div><div class="friends"><div>FRIENDS</div><span><a href="//www.cnblogs.com/lc-snail/" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">xhh's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1>xhh's Blog</h1><h5>一切皆文件，万物皆对象。</h5><div class="intro-social"><a class="fa fa-github" href="//github.com/" target="_blank" title="github"></a><a class="fa fa-weibo" href="//www.weibo.com" target="_blank" title="weibo"></a><a class="fa fa-facebook" href="//www.facebook.com" target="_blank" title="facebook"></a><a class="fa fa-twitter" href="//twitter.com" target="_blank" title="twitter"></a><a class="fa fa-rss" href="/atom.xml" target="_blank" title="rss"></a></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><section id="recent-posts"><div class="recent-post-item"><div class="post-title"><a href="/2020/04/29/%E5%8A%A8%E6%80%81%E9%93%BE%E8%A1%A8/">动态链表</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2020-04-29T08:20:48.351Z">2020-04-29 16:20:48</time></div><div class="recent-post-content">数据结构之动态链表链表的概念逻辑结构上一个挨一个的数据，在实际存储时，并没有像顺序表那样也相互紧挨着。恰恰相反，数据随机分布在内存中的各个位置，这种存储结构称为线性表的链式存储。
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">xiaohuihui</div><div class="profile-signature">for me</div><div class="friends"><div>FRIENDS</div><span><a href="//www.cnblogs.com/lc-snail/" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">xhh's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1>xhh's Blog</h1><h5>一切皆文件，万物皆对象。</h5><div class="intro-social"><a class="fa fa-github" href="//github.com/" target="_blank" title="github"></a><a class="fa fa-weibo" href="//www.weibo.com" target="_blank" title="weibo"></a><a class="fa fa-facebook" href="//www.facebook.com" target="_blank" title="facebook"></a><a class="fa fa-twitter" href="//twitter.com" target="_blank" title="twitter"></a><a class="fa fa-rss" href="/atom.xml" target="_blank" title="rss"></a></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><section id="recent-posts"><div class="recent-post-item"><div class="post-title"><a href="/2020/06/24/js%E7%AC%94%E8%AE%B0/">js笔记</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2020-06-24T02:52:11.079Z">2020-06-24 10:52:11</time></div><div class="recent-post-content">Javascript笔记1.对象
+什么是对象？
+1.多个数据的封装体
+2.用来保存多个数据的容器
+3.一个对象代表现实中的一个事物
+
+为什么使用对象？
+统一管理多个数据
+
+对象的组成
+成员变量(属性)和方法(函数)
+
+
+
+2.函数2.1函数的基本概念js可以让一个函数成为指定任意对象的方法进行调用
+js使用构造函数模拟类
+什么是回调函数？
+​    回调函数就是你定义了一个函数，但是你没有调用它，它执行了。
+常见的回调函数：dom事件回调函数，ajax请求回调函数，生命周期回调函数，定时器回调函数。
+函数中的this指向：
+​    
+2.2函数的原型对象(prototype)每个函数都有一个 ...</div><div class="read-more"><a class="more" href="/2020/06/24/js%E7%AC%94%E8%AE%B0/#more">ReadMore</a></div><hr></div><div class="recent-post-item"><div class="post-title"><a href="/2020/06/19/Node%E7%AC%94%E8%AE%B0/">Node笔记</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2020-06-19T07:56:49.875Z">2020-06-19 15:56:49</time></div><div class="recent-post-content">Node笔记Node.js中的JavaScriptnode中的JavaScript是没有bom和dom的.
+在node中为JavaScript提供了一些服务器级别api,比如文件操作的能力,服务器的能力.
+运行一个hello world文件1.创建编写Javascript脚本文件
+2.打开终端,定位到脚本文件所属目录
+3.输入node 文件名来执行对应的文件
+Node读取文件浏览器的JavaScript是没有操作文件的能力,但是node中JavaScript文件具有文件操作的能力.
+在Node中如果想要进行文件操作,就必须引入fs这个核心模块,在fs这个核心模块中,就提供所有的文件操作的相关A ...</div><div class="read-more"><a class="more" href="/2020/06/19/Node%E7%AC%94%E8%AE%B0/#more">ReadMore</a></div><hr></div><div class="recent-post-item"><div class="post-title"><a href="/2020/05/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2020-05-30T14:02:15.115Z">2020-05-30 22:02:15</time></div><div class="recent-post-content">数据结构(Data Struct)第一章 数据结构导论1.基本概念和术语数据：计算机中描述客观事物的符号，是计算机中可以操作的对象，能被计算机识别，并输入给计算机处理的符号集合。数据不仅仅包括整型，实型，还包括字符及声音、图像、视频等非数值类型。
+数据元素：是组成数据的，有意义的基本单位，在计算机中通常作为整体处理。也被称为记录。
+数据项：一个数据元素由多若干个数据项组成。数据项是数据不可分割的最小单位。
+数据对象：性质相同的数据元素的集合，是数据的子集。比如人类是数据对象，那么数据元素就是人，各种人，黑人白人黄人。数据项就是一个人的眼睛鼻子耳朵手等等。一般把数据对象称为数据。
+数据结构：相互 ...</div><div class="read-more"><a class="more" href="/2020/05/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/#more">ReadMore</a></div><hr></div><div class="recent-post-item"><div class="post-title"><a href="/2020/05/26/mysql%E8%BF%9B%E9%98%B6/">mysql进阶</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2020-05-26T07:03:50.554Z">2020-05-26 15:03:50</time></div><div class="recent-post-content">Mysql进阶一.事务1.什么是数据库事务?事物是一个不可分割的数据库操作序列，也就是数据库并发控制的基本单位，其执行的结果必须使数据库从一种一致性状态变到另一种一致性状态，事务是逻辑上的一组操作，要么全部执行,要么全部不执行。
+2.事务(Transaction)的四大特性
+原子性(Atomicity)：一个事务不可再分割，事务中的所有操作，要么全部完成，要么全部不完成。
+
+一致性(Consistency)：一个事务执行会使数据从一个一致状态切换到另外一致状态。也就是说，在事务开始之前和事务结束以后，数据库的完整性没有被破坏。
+
+隔离性(Isolation)：一个事务所做的修改在最终提交之前， ...</div><div class="read-more"><a class="more" href="/2020/05/26/mysql%E8%BF%9B%E9%98%B6/#more">ReadMore</a></div><hr></div><div class="recent-post-item"><div class="post-title"><a href="/2020/04/29/%E5%8A%A8%E6%80%81%E9%93%BE%E8%A1%A8/">动态链表</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2020-04-29T08:20:48.351Z">2020-04-29 16:20:48</time></div><div class="recent-post-content">数据结构之动态链表链表的概念逻辑结构上一个挨一个的数据，在实际存储时，并没有像顺序表那样也相互紧挨着。恰恰相反，数据随机分布在内存中的各个位置，这种存储结构称为线性表的链式存储。
 链表和数组的作用相同，都是用来存储数据。数组在C语言中是一种很常见的数据结构,它是用来存储数据的,但是数组是一次分配完全部内存，而链表则是在需要时再分配内存，每次只分配出一个节点(Node)的内存，链表是由多个节点组成的，而每个节点都有俩个部分：数据区和指针区。
 数据区：数据区是用来存储数据。
 指针区：指针区是用来存储指向下一节点的指针。
@@ -118,51 +155,4 @@ Class A中用到了Class B的对象b，一般情况下，需要在A的代码中�
 关于要扫描的ip地址，我们就用网上找的一家公司吧
 
 进行nmap扫描：
-我们针对与这个ip扫描，可以看到很多这个主机的信息，开放了哪些端口，它的状态以及它的服务，在此我介绍 ...</div><div class="read-more"><a class="more" href="/2020/02/27/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/#more">ReadMore</a></div><hr></div><div class="recent-post-item"><div class="post-title"><a href="/2020/02/24/PHP%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92/">PHP与数据库交互</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2020-02-24T15:34:17.660Z">2020-02-24 23:34:17</time></div><div class="recent-post-content">PHP与数据库交互1.连接mysql数据库123456789101112131415161718192021222324252627282930&lt;?php    //使用面向过程的方式    $link = mysqli_connect('localhost','root','root','xhh');    if ($link)&#123;        echo '连接成功';    &#125;    echo "&lt;pre&gt;";    $sql = "insert into tb_users values(3,'小灰灰','123456','2020-1-28 17:5 ...</div><div class="read-more"><a class="more" href="/2020/02/24/PHP%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%BA%A4%E4%BA%92/#more">ReadMore</a></div><hr></div><div class="recent-post-item"><div class="post-title"><a href="/2020/02/23/%E4%BA%AC%E4%B8%9C%E6%8C%89%E6%97%B6%E7%A7%92%E5%8D%95(%E4%BF%AE%E6%94%B9%E7%89%88)/">京东按时秒单(修改版)</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2020-02-22T18:39:29.542Z">2020-02-23 02:39:29</time></div><div class="recent-post-content">京东实现按时自动勾选购物车,结算知识点属于python方面的web爬虫(web crawler)，首先介绍一下selenium:
-selenium主要是用来做自动化测试，支持多种浏览器，爬虫中主要用来解决JavaScript渲染问题。模拟浏览器进行网页加载。
-1from selenium import webdriver
-
-本例采用谷歌浏览器进行测试:browser = webdriver.Chrome()
-1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515 ...</div><div class="read-more"><a class="more" href="/2020/02/23/%E4%BA%AC%E4%B8%9C%E6%8C%89%E6%97%B6%E7%A7%92%E5%8D%95(%E4%BF%AE%E6%94%B9%E7%89%88)/#more">ReadMore</a></div><hr></div><div class="recent-post-item"><div class="post-title"><a href="/2020/02/05/%E5%85%B3%E4%BA%8Egithub%E7%99%BB%E5%BD%95%E4%B8%8D%E4%B8%8A%E7%9A%84%E9%97%AE%E9%A2%98/">关于github登录不上的问题</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2020-02-05T05:07:31.749Z">2020-02-05 13:07:31</time></div><div class="recent-post-content">关于解决github登录不上的问题首先访问github的时候，网页会出来访问请求超时，然后我们cmd命令行去ping  github.com还是ping不通，请求超时，这时候，只需要在host文件里做些修改就可以:
-1C:\Windows\System32\drivers\etc
-
-找到hosts文件，这个文件的作用就是：将一些常用的网址域名与其对应的IP地址建立一个关联“数据库”，当用户在浏览器中输入一个需要登录的网址时，系统会首先自动从Hosts文件中寻找对应的IP地址，一旦找到，系统会立即打开对应网页，如果没有找到，则系统会再将网址提交DNS域名解析服务器进行IP地址的解析。
-在该文件的 ...</div><div class="read-more"><a class="more" href="/2020/02/05/%E5%85%B3%E4%BA%8Egithub%E7%99%BB%E5%BD%95%E4%B8%8D%E4%B8%8A%E7%9A%84%E9%97%AE%E9%A2%98/#more">ReadMore</a></div><hr></div><div class="recent-post-item"><div class="post-title"><a href="/2020/01/21/PHP%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/">PHP正则表达式</a></div><div class="post-time"><i class="fa fa-table"></i><time datetime="2020-01-21T08:35:55.029Z">2020-01-21 16:35:55</time></div><div class="recent-post-content">PHP正则表达式正则表达式是一种描述字符串结果的语法规则，是一个特定的格式化模式，可以匹配、替换、截取匹配的字符串。
-1.元字符正则表达式主要依赖于元字符. 元字符不代表他们本身的字面意思, 他们都有特殊的含义. 一些元字符写在方括号中的时候有一些特殊的意思. 以下是一些元字符的介绍:
-
-
-
-元字符
-说明
-
-
-
-.
-匹配除换行符以外的任意字符
-
-
-\w
-匹配字母或数字或下划线或汉字
-
-
-\s
-匹配任意的空白符
-
-
-\d
-匹配数字
-
-
-\b
-匹配单词的开始或结束
-
-
-^
-匹配字符串的开始
-
-
-$
-匹配字符串的结束
-
-
-例：1234\bmr\w*\b/*	匹配以字母mr开头的单词,先是从某个单词开 ...</div><div class="read-more"><a class="more" href="/2020/01/21/PHP%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more">ReadMore</a></div><hr></div></section><nav class="cxo-page-nav"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">NEXT &amp;#62;</a></nav></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>
+我们针对与这个ip扫描，可以看到很多这个主机的信息，开放了哪些端口，它的状态以及它的服务，在此我介绍 ...</div><div class="read-more"><a class="more" href="/2020/02/27/Kali%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/#more">ReadMore</a></div><hr></div></section><nav class="cxo-page-nav"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">NEXT &amp;#62;</a></nav></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>

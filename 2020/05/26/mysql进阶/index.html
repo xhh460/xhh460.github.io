@@ -1,0 +1,124 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="小灰灰"><meta name="renderer" content="webkit"><meta name="copyright" content="小灰灰"><meta name="keywords" content="小灰灰"><meta name="description" content=""><meta name="Cache-Control" content="no-cache"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>mysql进阶 · xhh's Blog</title><link rel="stylesheet" href="/css/style.css?v=2018.7.9"><link rel="stylesheet" href="/css/animation.css?v=2018.7.9"><link rel="icon" href="/img/assets/people1.ico"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.6"><!-- scripts--><script>(function( w ){
+  "use strict";
+  // rel=preload support test
+  if( !w.loadCSS ){
+    w.loadCSS = function(){};
+  }
+  // define on the loadCSS obj
+  var rp = loadCSS.relpreload = {};
+  // rel=preload feature support test
+  // runs once and returns a function for compat purposes
+  rp.support = (function(){
+    var ret;
+    try {
+      ret = w.document.createElement( "link" ).relList.supports( "preload" );
+    } catch (e) {
+      ret = false;
+    }
+    return function(){
+      return ret;
+    };
+  })();
+
+  // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+  // then change that media back to its intended value on load
+  rp.bindMediaToggle = function( link ){
+    // remember existing media attr for ultimate state, or default to 'all'
+    var finalMedia = link.media || "all";
+
+    function enableStylesheet(){
+      link.media = finalMedia;
+    }
+
+    // bind load handlers to enable media
+    if( link.addEventListener ){
+      link.addEventListener( "load", enableStylesheet );
+    } else if( link.attachEvent ){
+      link.attachEvent( "onload", enableStylesheet );
+    }
+
+    // Set rel and non-applicable media type to start an async request
+    // note: timeout allows this to happen async to let rendering continue in IE
+    setTimeout(function(){
+      link.rel = "stylesheet";
+      link.media = "only x";
+    });
+    // also enable media after 3 seconds,
+    // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+    setTimeout( enableStylesheet, 3000 );
+  };
+
+  // loop through link elements in DOM
+  rp.poly = function(){
+    // double check this to prevent external calls from running
+    if( rp.support() ){
+      return;
+    }
+    var links = w.document.getElementsByTagName( "link" );
+    for( var i = 0; i < links.length; i++ ){
+      var link = links[ i ];
+      // qualify links to those with rel=preload and as=style attrs
+      if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+        // prevent rerunning on link
+        link.setAttribute( "data-loadcss", true );
+        // bind listeners to toggle media back
+        rp.bindMediaToggle( link );
+      }
+    }
+  };
+
+  // if unsupported, run the polyfill
+  if( !rp.support() ){
+    // run once at least
+    rp.poly();
+
+    // rerun poly on an interval until onload
+    var run = w.setInterval( rp.poly, 500 );
+    if( w.addEventListener ){
+      w.addEventListener( "load", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    } else if( w.attachEvent ){
+      w.attachEvent( "onload", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    }
+  }
+
+
+  // commonjs
+  if( typeof exports !== "undefined" ){
+    exports.loadCSS = loadCSS;
+  }
+  else {
+    w.loadCSS = loadCSS;
+  }
+}( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/people.png"></div><!--.profile-saying
+  i.fa.fa-comment
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">xiaohuihui</div><div class="profile-signature">for me</div><div class="friends"><div>FRIENDS</div><span><a href="//www.cnblogs.com/lc-snail/" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">xhh's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">mysql进阶</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2020-05-26 15:03:50</span></span></div><div class="post-intro-read"><span> Word count: <span class="post-count">965</span> | Reading time: <span class="post-count">3</span>min</span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h1 id="Mysql进阶"><a href="#Mysql进阶" class="headerlink" title="Mysql进阶"></a>Mysql进阶</h1><h3 id="一-事务"><a href="#一-事务" class="headerlink" title="一.事务"></a>一.事务</h3><h4 id="1-什么是数据库事务"><a href="#1-什么是数据库事务" class="headerlink" title="1.什么是数据库事务?"></a>1.什么是数据库事务?</h4><p>事物是一个不可分割的数据库操作序列，也就是数据库并发控制的基本单位，其执行的结果必须使数据库从一种一致性状态变到另一种一致性状态，事务是逻辑上的一组操作，要么全部执行,要么全部不执行。</p>
+<h4 id="2-事务-Transaction-的四大特性"><a href="#2-事务-Transaction-的四大特性" class="headerlink" title="2.事务(Transaction)的四大特性"></a>2.事务(Transaction)的四大特性</h4><ul>
+<li><p>原子性(Atomicity)：一个事务不可再分割，事务中的所有操作，要么全部完成，要么全部不完成。</p>
+</li>
+<li><p>一致性(Consistency)：一个事务执行会使数据从一个一致状态切换到另外一致状态。也就是说，在事务开始之前和事务结束以后，数据库的完整性没有被破坏。</p>
+</li>
+<li><p>隔离性(Isolation)：一个事务所做的修改在最终提交之前，对其他事务是不可见的。也就是说一个事务的执行不会受到其它事务的干扰。</p>
+</li>
+<li><p>持久性(Durability)：一个事务一旦提交以后，对数据的修改将会永久的保存到数据库中，即便系统故障也不会丢失。</p>
+</li>
+</ul>
+<h4 id="3-事务的并发性问题"><a href="#3-事务的并发性问题" class="headerlink" title="3.事务的并发性问题?"></a>3.事务的并发性问题?</h4><ol>
+<li><p>什么时候会发生事务的并发性问题?</p>
+<p>当多个事务同时操作同一个数据库的相同数据时，就会发生并发问题。</p>
+</li>
+<li><p>事务的并发性问题有哪些?</p>
+<p>1）脏读(Dirty read)：对于俩个事务A,B，A读取了已经被B更新但是还没有提交的数据。如果在这个时候，B进行了回滚，那么X1读取到的数据就是临时且无效的。</p>
+<p>例子：有一天，事务A访问了数据库，事务A想把它的小弟加到数据库里面，就执行了sql语句<code>insert into users(表) values(4,&#39;小弟&#39;)</code>,但是事务A并没有提交事务，然后这个时候，事务B来了，它要查询表里面的所有users的名字<code>select name from users</code>，这个时候，因为事务没有隔离性，所以事务B会读取到小弟的名字，这个时候就叫脏读。</p>
+</li>
+</ol>
+<p>   2）不可重复读(Non-repeatable read)：在一个事务的两次查询之中数据不一致，这可能是两次查询过程中间插入了一个事务更新的原有的数据。</p>
+<p>   例子：第二天，事务A访问了数据库，它要查看ID为1的用户的名字，于是执行了<code>select name from users(表) where id = 1</code>，此时此刻，事务B来了，因为ID为1的用户改名字了，所以要进行更新，于是执行了<code>update users(表) set name = &#39;大弟子&#39; where id = 1</code>;但是嘛，这个时候，事务A还想再看看ID为1的用户的名字，于是执行了<code>select name from uses(表) where id = 1</code>，结果，俩次读取出来的名字是不一样的，这就是不可重复读。</p>
+<p>   3）幻读(Phantom Read)在一个事务的两次查询中数据条数不一致，例如一个事务查询了几列(Row)数据，而另一个事务却在此时插入了几列新的数据，先前的事务在接下来查询中，就会发现几列数据是它之前所没有的。</p>
+<p>   例子：第三天，事务A访问了数据库，它想要看看数据库的用户有哪些，于是执行了<code>select*form users(表)</code>；这个时候，事务B来了，往数据库里面加入了它的小弟。执行了<code>insert into users(表) values(4,&#39;小弟&#39;)</code>;然后嘛，事务A把刚刚看到的用户有哪些忘记了，于是它又执行了<code>select*form users(表)</code>；结果，第一次它查到的用户有3个，第二次竟查出来四个，搞得它一脸懵逼。这个就叫幻读。</p>
+</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://yoursite.com">小灰灰</a></p><p> <span>Link:  </span><a href="http://yoursite.com/2020/05/26/mysql%E8%BF%9B%E9%98%B6/">http://yoursite.com/2020/05/26/mysql%E8%BF%9B%E9%98%B6/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/3.0" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><a class="prevSlogan" href="/2020/05/30/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="数据结构"><span>< PreviousPost</span><br><span class="prevTitle">数据结构</span></a><a class="nextSlogan" href="/2020/04/29/%E5%8A%A8%E6%80%81%E9%93%BE%E8%A1%A8/" title="动态链表"><span>NextPost ></span><br><span class="nextTitle">动态链表</span></a><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Mysql进阶"><span class="toc-number">1.</span> <span class="toc-text">Mysql进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一-事务"><span class="toc-number">1.0.1.</span> <span class="toc-text">一.事务</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-什么是数据库事务"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">1.什么是数据库事务?</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-事务-Transaction-的四大特性"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">2.事务(Transaction)的四大特性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-事务的并发性问题"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">3.事务的并发性问题?</span></a></li></ol></li></ol></li></ol></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>
