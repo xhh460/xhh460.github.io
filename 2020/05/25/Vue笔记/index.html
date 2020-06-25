@@ -100,7 +100,7 @@
   .saying--><div class="cxo-profile-inner"><div class="profile-name">xiaohuihui</div><div class="profile-signature">for me</div><div class="friends"><div>FRIENDS</div><span><a href="//www.cnblogs.com/lc-snail/" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">xhh's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">Vue笔记</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2020-05-25 18:41:06</span></span></div><div class="post-intro-read"><span> Word count: <span class="post-count">6.3k</span> | Reading time: <span class="post-count">26</span>min</span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h3 id="Vue基础语法"><a href="#Vue基础语法" class="headerlink" title="Vue基础语法"></a>Vue基础语法</h3><p>v-bind:    动态绑定属性    可简写为:    可绑定class属性或者style属性    :class或:style或input里面的值:input</p>
 <p>v-on:    事件监听   可简写为@           一般监听点击事件@click</p>
 <p>把监听事件用在封装的组件上是不会产生监听效果的，如果我们想要监听一个组件的原生事件时，必须给对应的事件加上.native修饰符，才能进行接听。</p>
-<p><img src="./images/Vue%E7%AC%94%E8%AE%B0/image-20200613175315588.png" alt="image-20200613175315588"></p>
+<p><img src="/images/Vue%E7%AC%94%E8%AE%B0/image-20200613175315588.png" alt="image-20200613175315588"></p>
 <p>v-for    遍历数组</p>
 <p>v-show   用于控制元素的渲染</p>
 <p>v-model    实现数据的双向绑定</p>
@@ -140,19 +140,19 @@
 <p>runtime-compiler编译过程：template-&gt;ast(抽象语法树)-&gt;rander(函数)-&gt;virtual dom-&gt;true dom-&gt;UI</p>
 <p>runtime-only编译过程：rander-&gt;virtual dom-&gt;UI</p>
 <p>相比性能而言,runtime-only性能更高，代码量更少,轻6KB</p>
-<img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200526103144975.png" alt="image-20200526103144975" style="zoom: 50%;" />
+<img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200526103144975.png" alt="image-20200526103144975" style="zoom: 50%;" />
 
 <p>runtime-only直接使用render函数编译,render函数相当于的参数h相当于createElement函数，</p>
-<img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200526103338938.png" alt="image-20200526103338938" style="zoom: 50%;" />
+<img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200526103338938.png" alt="image-20200526103338938" style="zoom: 50%;" />
 
 <p>上图的传入对象是App,rander函数省略了template的编译,那么App里面的template到底是如何执行的？其实App转化成了一个对象，而里面的tempalte被转化成了rander函数，是被谁转化的呢，是被package.json文件里面的vue-template-compiler插件转化的。</p>
 <p>npm run dev 流程图：</p>
-<img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200526121325392.png" alt="image-20200526121325392" style="zoom:50%;" />
+<img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200526121325392.png" alt="image-20200526121325392" style="zoom:50%;" />
 
 
 
 <p>npm run build 流程图：</p>
-<img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200526121357552.png" alt="image-20200526121357552" style="zoom:50%;" />
+<img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200526121357552.png" alt="image-20200526121357552" style="zoom:50%;" />
 
 
 
@@ -175,10 +175,10 @@
 <p><router-link>标签是一个v-router中已经内置的组件，它会被渲染成一个<a>标签，跳转路径使用的是属性to，而属性tag的话可以决定渲染成什么样的组件，比如button。active-class属性当路由匹配成功时，会自动给当前元素设置一个router-link-active的class。</p>
 <p><router-view>会根据当前的路径，动态渲染出不同的组件.</p>
 <h3 id="动态路由"><a href="#动态路由" class="headerlink" title="动态路由"></a>动态路由</h3><p>动态路由通过v-bind绑定url和拼接url的方式，来动态获取路由</p>
-<img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528135745322.png" alt="image-20200528135745322" style="zoom:50%;" />
+<img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528135745322.png" alt="image-20200528135745322" style="zoom:50%;" />
 
 <p>然后进行动态展示</p>
-<img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528135810476.png" alt="image-20200528135810476" style="zoom:50%;" />
+<img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528135810476.png" alt="image-20200528135810476" style="zoom:50%;" />
 
 
 
@@ -189,31 +189,31 @@
 <p>history.forward根据参数进行前进。</p>
 <p>history.replaceState({},’’,’home’) 指替换，不能返回之前的url</p>
 <h3 id="路由懒加载"><a href="#路由懒加载" class="headerlink" title="路由懒加载"></a>路由懒加载</h3><p>当打包构建应用的时候，javascrit包会变得非常大，影响页面加载。如果我们能把不同路由对应的组件分割成不同的代码块，然后当路由被访问的时候才能加载对应组件，用到时再加载。</p>
-<img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528154241259.png" alt="image-20200528154241259" style="zoom:50%;" />
+<img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528154241259.png" alt="image-20200528154241259" style="zoom:50%;" />
 
 
 
 
 
 <h3 id="路由参数传递"><a href="#路由参数传递" class="headerlink" title="路由参数传递"></a>路由参数传递</h3><p>to属性可以传对象，里面的query属性可传参数</p>
-<img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528161332200.png" alt="image-20200528161332200" style="zoom:50%;" />
+<img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528161332200.png" alt="image-20200528161332200" style="zoom:50%;" />
 
 
 
-<p><img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528161405521.png" alt="image-20200528161405521"></p>
-<p><img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528161542565.png" alt="image-20200528161542565"></p>
+<p><img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528161405521.png" alt="image-20200528161405521"></p>
+<p><img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528161542565.png" alt="image-20200528161542565"></p>
 <h3 id="keep-alive问题"><a href="#keep-alive问题" class="headerlink" title="keep alive问题"></a>keep alive问题</h3><p>keep-alive是Vue内置的一个组件，可以使被包含的组件保留状态，或避免重新渲染。</p>
 <p>router-view也是一个组件，如果直接被包在keep-alive里面，所有匹配到的视图组件都会被缓存。</p>
-<p><img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90.jpg" alt="vue生命周期钩子"></p>
+<p><img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/vue%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E9%92%A9%E5%AD%90.jpg" alt="vue生命周期钩子"></p>
 <p>当我们使用生命周期函数去渲染的时候会发现，当我们切换组件的时候，原来所在的组件会被destroy，而点击一个页面的时候会触发created函数。</p>
-<img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528224531971.png" alt="image-20200528224531971" style="zoom:50%;" />
+<img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528224531971.png" alt="image-20200528224531971" style="zoom:50%;" />
 
-<img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528224544861.png" alt="image-20200528224544861" style="zoom:50%;" />
+<img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528224544861.png" alt="image-20200528224544861" style="zoom:50%;" />
 
 
 
 <p>把<router-view>标签包到<keep-alive>标签中,就可使用keep-alive，就不会被destroyed,可以大大提高性能</p>
-<img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528225016287.png" alt="image-20200528225016287" style="zoom:50%;" />
+<img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200528225016287.png" alt="image-20200528225016287" style="zoom:50%;" />
 
 <p>keep-alive存在的时候才可使用生命周期函数activated()和deactivated()函数。</p>
 <p>使用</p>
@@ -266,24 +266,24 @@
 <p>猜疑？为什么我们不自己封装一个对象，然后把公共资源放到对象里，用的时候各个组件再调用呢？</p>
 <p>答：当我们使用对象的时候，当我们改变对象里面的值时，组件里之前调用的值是不会改变的，就像不使用单例模式前我们实例化的时候，第一次的对象值跟第二次的对象值结果不一样。每次实例化的时候都会开辟不同的内存地址，所以值是不一样的。但是Vuex就不一样了，它会响应式，即使你在对象里改变了值，它以前的值也会改变的。</p>
 <p>所以Vuex就是一个在多个组件间共享状态的插件。</p>
-<p><img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/@5_()9_GQE7%25%7DVJ%5DG%5BLGI5X.png" alt="img"></p>
+<p><img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/@5_()9_GQE7%25%7DVJ%5DG%5BLGI5X.png" alt="img"></p>
 <p>actions是用来回调的，回调一般用在后端。Devtools是用来记录state状态的，可根据Devtools来查找是哪个组件改的记录。</p>
 <p><strong>State</strong>单一状态树：尽量只使用一个store，便于管理和维护。</p>
 <p><strong>getters</strong>：有时候我们需要从 store 中的 state 中派生出一些状态，例如对列表进行过滤并计数，我们就用到getter函数对state中的东西作出筛选和过滤,getters是内容。</p>
 <p><strong>mutations</strong>：相应规则：Vuex的store中的state是响应式的，当state中数据发生改变时，Vue组件会自动更新。mutation操作一般用在同步操作，如果用在异步的话，效果不是那么的好，devtools插件会捕捉不到有时。所有异步的话就要用Action。</p>
 <p><strong>Actions</strong>：代替mutation进行异步操作。但是它并没有跳过mutation环节，mutation环节是必不可少的。</p>
 <p>以下为Action的步骤代码:</p>
-<p><img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200603145214369.png" alt="image-20200603145214369"></p>
-<p><img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200603145233514.png" alt="image-20200603145233514"></p>
+<p><img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200603145214369.png" alt="image-20200603145214369"></p>
+<p><img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200603145233514.png" alt="image-20200603145233514"></p>
 <p>然后在store里进行异步：</p>
-<p><img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200603145310861.png" alt="image-20200603145310861"></p>
-<p><img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200603145730767.png" alt="image-20200603145730767"></p>
+<p><img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200603145310861.png" alt="image-20200603145310861"></p>
+<p><img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200603145730767.png" alt="image-20200603145730767"></p>
 <p><strong>Modules</strong>：Module就是模块的意思，因为Vue的state使用单一状态树，意味着很多状态都交给Vuex来管理，当应用非常多的时候，store对象就会变得非常复杂化，可读性差。为了解决这个问题，vuex提供了module，而每个module都有自己的states，mutations</p>
 <p>,actions，getters，小李把这现象称为疯狂套娃模式。在调用modules的时候，就如下图调用，我用的是a模块里的东西。</p>
-<p><img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200603110515384.png" alt="image-20200603110515384"></p>
+<p><img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200603110515384.png" alt="image-20200603110515384"></p>
 <p>在真正的开发中，如果把很多东西都放到同一个文件里面，会造成项目看着很乱，所以，我们分别为getters，mutations，actions，modules各自见自己的文件，然后使用模块导出导入的方式，进行一一调用。</p>
-<p><img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200603151422126.png" alt="image-20200603151422126"></p>
-<p><img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200603153339982.png" alt="image-20200603153339982"></p>
+<p><img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200603151422126.png" alt="image-20200603151422126"></p>
+<p><img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200603153339982.png" alt="image-20200603153339982"></p>
 <h3 id="axios网络模块封装"><a href="#axios网络模块封装" class="headerlink" title="axios网络模块封装"></a>axios网络模块封装</h3><p>一般我们进行网络请求封装的时候都是使用jQuery-Ajax来进行的，但是在Vue中的话，我们已经引入了Vue框架，如果再引入jQuery的话，会造成资源的一种浪费，所以完全没有必要去进行，所以在Vue中我们进行网络请求的时候我们一般都使用axios框架。</p>
 <p><strong>jsonp</strong>：使用jsonp的原因是为了解决跨域访问的问题。JSONP的核心在于通过<script>标签的src来帮我们请求数据，当我们的项目部署到domain1.com服务器上的时候，此项目是不能直接访问domain2.com服务器上的资料。这个时候，我们利用<script>标签上的scr来帮助我们去服务器上请求数据，将数据当作javascript的函数执行，并在执行的过程中，传入我们需要的json，所以封装json的核心就在于我们监听windows上的jsonp进行回调的名称。</p>
 <p>安装axios : npm  Install axios  --save 开发时依赖</p>
@@ -299,9 +299,9 @@
 
 <p>为了避免组件对axios的框架，我们就应该创建公共的axios模块，需要时各个组件向公共axios模块调用即可。</p>
 <p>先建个network文件,放要封装的axios模块。</p>
-<p><img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200604222148228.png" alt="image-20200604222148228"></p>
+<p><img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200604222148228.png" alt="image-20200604222148228"></p>
 <p>然后再main.js里面进行引入。</p>
-<p><img src="./images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200604222241768.png" alt="image-20200604222241768"></p>
+<p><img src="/images/Vue%E8%84%9A%E6%89%8B%E6%9E%B6/image-20200604222241768.png" alt="image-20200604222241768"></p>
 <p><strong>axios拦截器</strong>：</p>
 <p>请求拦截器的作用是在请求发送前进行一些操作，例如在每个请求体里加上token，统一做了处理如果以后要改也非常容易。</p>
 <p>响应拦截器的作用是在接收到响应后进行一些操作，例如在服务器返回登录状态失效，需要重新登录的时候，跳转到登录页。</p>
