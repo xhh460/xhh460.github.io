@@ -1,0 +1,240 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="小灰灰"><meta name="renderer" content="webkit"><meta name="copyright" content="小灰灰"><meta name="keywords" content="小灰灰"><meta name="description" content=""><meta name="Cache-Control" content="no-cache"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>javascript内置对象及方法 · xhh's Blog</title><link rel="stylesheet" href="/css/style.css?v=2018.7.9"><link rel="stylesheet" href="/css/animation.css?v=2018.7.9"><link rel="icon" href="/img/assets/people1.ico"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.6"><!-- scripts--><script>(function( w ){
+  "use strict";
+  // rel=preload support test
+  if( !w.loadCSS ){
+    w.loadCSS = function(){};
+  }
+  // define on the loadCSS obj
+  var rp = loadCSS.relpreload = {};
+  // rel=preload feature support test
+  // runs once and returns a function for compat purposes
+  rp.support = (function(){
+    var ret;
+    try {
+      ret = w.document.createElement( "link" ).relList.supports( "preload" );
+    } catch (e) {
+      ret = false;
+    }
+    return function(){
+      return ret;
+    };
+  })();
+
+  // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+  // then change that media back to its intended value on load
+  rp.bindMediaToggle = function( link ){
+    // remember existing media attr for ultimate state, or default to 'all'
+    var finalMedia = link.media || "all";
+
+    function enableStylesheet(){
+      link.media = finalMedia;
+    }
+
+    // bind load handlers to enable media
+    if( link.addEventListener ){
+      link.addEventListener( "load", enableStylesheet );
+    } else if( link.attachEvent ){
+      link.attachEvent( "onload", enableStylesheet );
+    }
+
+    // Set rel and non-applicable media type to start an async request
+    // note: timeout allows this to happen async to let rendering continue in IE
+    setTimeout(function(){
+      link.rel = "stylesheet";
+      link.media = "only x";
+    });
+    // also enable media after 3 seconds,
+    // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+    setTimeout( enableStylesheet, 3000 );
+  };
+
+  // loop through link elements in DOM
+  rp.poly = function(){
+    // double check this to prevent external calls from running
+    if( rp.support() ){
+      return;
+    }
+    var links = w.document.getElementsByTagName( "link" );
+    for( var i = 0; i < links.length; i++ ){
+      var link = links[ i ];
+      // qualify links to those with rel=preload and as=style attrs
+      if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+        // prevent rerunning on link
+        link.setAttribute( "data-loadcss", true );
+        // bind listeners to toggle media back
+        rp.bindMediaToggle( link );
+      }
+    }
+  };
+
+  // if unsupported, run the polyfill
+  if( !rp.support() ){
+    // run once at least
+    rp.poly();
+
+    // rerun poly on an interval until onload
+    var run = w.setInterval( rp.poly, 500 );
+    if( w.addEventListener ){
+      w.addEventListener( "load", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    } else if( w.attachEvent ){
+      w.attachEvent( "onload", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    }
+  }
+
+
+  // commonjs
+  if( typeof exports !== "undefined" ){
+    exports.loadCSS = loadCSS;
+  }
+  else {
+    w.loadCSS = loadCSS;
+  }
+}( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/people.png"></div><!--.profile-saying
+  i.fa.fa-comment
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">xiaohuihui</div><div class="profile-signature">for me</div><div class="friends"><div>FRIENDS</div><span><a href="//www.cnblogs.com/lc-snail/" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">xhh's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">javascript内置对象及方法</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2020-07-01 20:06:31</span></span></div><div class="post-intro-read"><span> Word count: <span class="post-count">1.2k</span> | Reading time: <span class="post-count">5</span>min</span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><h1 id="JavaScript内置对象及方法"><a href="#JavaScript内置对象及方法" class="headerlink" title="JavaScript内置对象及方法"></a>JavaScript内置对象及方法</h1><h3 id="1-JS-Array"><a href="#1-JS-Array" class="headerlink" title="1.JS Array"></a>1.JS Array</h3><p>Array对象：Array对象用于在单个变量中存储多个值。</p>
+<p>创建Array对象的语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Array</span>();</span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Array</span>(size);  <span class="comment">//size参数为数组的个数</span></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Array</span>(argument1,argument2,..);		<span class="comment">//数组元素</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="Array对象属性"><a href="#Array对象属性" class="headerlink" title="Array对象属性"></a>Array对象属性</h4><h5 id="1-length"><a href="#1-length" class="headerlink" title="1.length"></a>1.length</h5><p>​    legth用来设置或返回数组中元素的数目    </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="string">'xhh'</span>;</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="string">'yql'</span>;</span><br><span class="line">    arr[<span class="number">2</span>] = <span class="string">'hwq'</span>;</span><br><span class="line">    <span class="built_in">console</span>.log(arr.length);    <span class="comment">//3</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr[<span class="number">1</span>]);    <span class="comment">//yql</span></span><br><span class="line">    arr.length = <span class="number">5</span>; </span><br><span class="line">    <span class="built_in">console</span>.log(arr.length);   <span class="comment">//5 </span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> arr2 = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="string">'xhh'</span>,<span class="string">'xjj'</span>,<span class="string">'xll'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(arr2[<span class="number">0</span>]);     <span class="comment">//xhh</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr2.length);    <span class="comment">//3</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="Array对象方法"><a href="#Array对象方法" class="headerlink" title="Array对象方法"></a>Array对象方法</h4><h5 id="1-contact"><a href="#1-contact" class="headerlink" title="1.contact()"></a>1.contact()</h5><p>concat() 方法用于连接两个或多个数组。</p>
+<p>语法:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.concat(arr1,arr2)	<span class="comment">//括号内是要与arr数组连接的数组,然后返回一个新数组</span></span><br></pre></td></tr></table></figure>
+
+<p>代码案例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">2</span>);</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="string">'xhh'</span>,</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="string">'yql'</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr);    <span class="comment">//xhh,yql</span></span><br><span class="line">    <span class="keyword">var</span> newArray = arr.concat(<span class="string">'kobe'</span>,<span class="string">'huawuque'</span>);<span class="comment">//此处也可传数组对象</span></span><br><span class="line">    <span class="built_in">console</span>.log(newArray);   <span class="comment">//xhh,yql,kobe,huawuque </span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="2-join"><a href="#2-join" class="headerlink" title="2.join()"></a>2.join()</h5><p>join()方法用于把数组的每个元素转化为字符串，然后将这些字符串拼接起来。    </p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.join()		<span class="comment">//括号里的参数为分隔符,用来分隔数组元素</span></span><br></pre></td></tr></table></figure>
+
+<p>代码案例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="string">'xhh'</span>,</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="string">'yql'</span>,</span><br><span class="line">    arr[<span class="number">2</span>] = <span class="string">'hwq'</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr)</span><br><span class="line">    <span class="keyword">var</span> str = arr.join(<span class="string">" "</span>);</span><br><span class="line">    <span class="keyword">var</span> str2 = arr.join(<span class="string">"."</span>)</span><br><span class="line">    <span class="keyword">var</span> str3 = arr.join(<span class="string">""</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(str);   <span class="comment">//xhh yql hwq</span></span><br><span class="line">    <span class="built_in">console</span>.log(str2);    <span class="comment">//xhh.yql.hwq</span></span><br><span class="line">    <span class="built_in">console</span>.log(str3);    <span class="comment">//xhhyqlhwq</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="3-pop"><a href="#3-pop" class="headerlink" title="3.pop()"></a>3.pop()</h5><p>pop()方法用于删除并返回数组的最后一个元素。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.pop()	<span class="comment">//pop方法也称弹栈(出栈),如果数组为空,返回undefined</span></span><br></pre></td></tr></table></figure>
+
+<p>代码案例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="string">'xhh'</span>,</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="string">'yql'</span>,</span><br><span class="line">    arr[<span class="number">2</span>] = <span class="string">'hwq'</span> </span><br><span class="line">    popElement = arr.pop();   </span><br><span class="line">    <span class="built_in">console</span>.log(popElement);  <span class="comment">//hwq</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr);   <span class="comment">//xhh,yql</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="4-push"><a href="#4-push" class="headerlink" title="4.push()"></a>4.push()</h5><p>push()方法在数组末尾添加一个或多个元素,并返回新的长度。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.push(element1,element2...)</span><br></pre></td></tr></table></figure>
+
+<p>代码案例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="string">'xhh'</span>,</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="string">'yql'</span>,</span><br><span class="line">    arr[<span class="number">2</span>] = <span class="string">'hwq'</span></span><br><span class="line">    <span class="keyword">var</span> pushElement = arr.push(<span class="string">'tangsan'</span>);</span><br><span class="line">    <span class="built_in">console</span>.log(pushElement);     <span class="comment">//4</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr);   <span class="comment">//xhh,yql,hwq,tangsan</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="5-reverse"><a href="#5-reverse" class="headerlink" title="5.reverse()"></a>5.reverse()</h5><p>reverse()方法用于翻转数组元素的顺序。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.reverse()</span><br></pre></td></tr></table></figure>
+
+<p>代码案例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="string">'xhh'</span>,</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="string">'yql'</span>,</span><br><span class="line">    arr[<span class="number">2</span>] = <span class="string">'hwq'</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr);     <span class="comment">//xhh.yql,hwq</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr.reverse());     <span class="comment">//hwq,xhh,yql</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="6-shift"><a href="#6-shift" class="headerlink" title="6.shift()"></a>6.shift()</h5><p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.shift()</span><br></pre></td></tr></table></figure>
+
+
+
+<p>shift()方法用于把数组的第一个元素删除，并返回被删除的元素。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="string">'xhh'</span>,</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="string">'yql'</span>,</span><br><span class="line">    arr[<span class="number">2</span>] = <span class="string">'hwq'</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr.shift());   <span class="comment">//xhh</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr)    <span class="comment">//yql,hwq</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="7-slice"><a href="#7-slice" class="headerlink" title="7.slice()"></a>7.slice()</h5><p>slice()方法用于从数组中返回指定的元素。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.slice(start,end)	<span class="comment">//start为开始元素(从何处开始选取),end为结束元素(从何处结束选取,输出时不包括此位置的元素),end可选</span></span><br></pre></td></tr></table></figure>
+
+<p>代码案例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="string">'xhh'</span>,</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="string">'yql'</span>,</span><br><span class="line">    arr[<span class="number">2</span>] = <span class="string">'hwq'</span>,</span><br><span class="line">    arr[<span class="number">3</span>] = <span class="string">'xiaowu'</span>,</span><br><span class="line">    arr[<span class="number">4</span>] = <span class="string">'tanghao'</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr.slice(<span class="number">2</span>));  <span class="comment">//hwq,xiaowu,tanghao</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr.slice(<span class="number">1</span>,<span class="number">3</span>));    <span class="comment">//yql,hwq</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr.slice(<span class="number">0</span>,<span class="number">3</span>));    <span class="comment">//xhh,yql,hwq</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="8-sort"><a href="#8-sort" class="headerlink" title="8.sort()"></a>8.sort()</h5><p>sort()方法用于对数组的元素进行排序。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.sort()		<span class="comment">//默认按字母排序</span></span><br></pre></td></tr></table></figure>
+
+<p>代码案例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="string">'xhh'</span>,</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="string">'yql'</span>,</span><br><span class="line">    arr[<span class="number">2</span>] = <span class="string">'hwq'</span>,</span><br><span class="line">    arr[<span class="number">3</span>] = <span class="string">'xiaowu'</span>,</span><br><span class="line">    arr[<span class="number">4</span>] = <span class="string">'tanghao'</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr)</span><br><span class="line">    <span class="built_in">console</span>.log(arr.sort())</span><br><span class="line">  &lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果不局限与字母顺序排序,就需要给sort方法提供函数，函数内传两个参数a和b。</p>
+<ul>
+<li>若 a 小于 b，在排序后的数组中 a 应该出现在 b 之前，则返回一个小于 0 的值。</li>
+<li>若 a 等于 b，则返回 0。</li>
+<li>若 a 大于 b，则返回一个大于 0 的值。</li>
+</ul>
+<p>如果比较的两值刚好是数字,a-b升序,b-a降序。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">sortNumber</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">      <span class="keyword">return</span> b-a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">5</span>,<span class="number">4</span>,<span class="number">3</span>,<span class="number">6</span>,<span class="number">9</span>,<span class="number">15</span>,<span class="number">50</span>];</span><br><span class="line">    <span class="built_in">console</span>.log(arr);   <span class="comment">//1, 5, 4, 3, 6, 9, 15, 50</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr.sort(sortNumber));  <span class="comment">//50, 15, 9, 6, 5, 4, 3, 1</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="9-splice"><a href="#9-splice" class="headerlink" title="9.splice()"></a>9.splice()</h5><p>splice()方法向/从数组中添加/删除元素，然后返回被删除的元素。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">arr.splice(index,howmany,element1...elementn)</span><br><span class="line">index:从哪开始删除</span><br><span class="line">howmany:删除多少个元素</span><br><span class="line">element1...elementn:向数组中添加元素</span><br></pre></td></tr></table></figure>
+
+<p>代码案例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="string">'xhh'</span>,</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="string">'yql'</span>,</span><br><span class="line">    arr[<span class="number">2</span>] = <span class="string">'hwq'</span>,</span><br><span class="line">    arr[<span class="number">3</span>] = <span class="string">'xiaowu'</span>,</span><br><span class="line">    arr[<span class="number">4</span>] = <span class="string">'tanghao'</span></span><br><span class="line">    arr.splice(<span class="number">2</span>,<span class="number">2</span>,<span class="string">'bibidong'</span>);     <span class="comment">//从第二个元素开始删除,删除两个元素,然后在删除位置加上新元素bibidong</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr);  <span class="comment">//"xhh", "yql", "bibidong", "tanghao"</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="10-toString"><a href="#10-toString" class="headerlink" title="10.toString()"></a>10.toString()</h5><p>toString()方法把数组转化成字符串，并返回结果。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.toString()</span><br></pre></td></tr></table></figure>
+
+<p>代码案例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">    <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="string">'xhh'</span>,</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="string">'yql'</span>,</span><br><span class="line">    arr[<span class="number">2</span>] = <span class="string">'hwq'</span>,</span><br><span class="line">    arr[<span class="number">3</span>] = <span class="string">'xiaowu'</span>,</span><br><span class="line">    arr[<span class="number">4</span>] = <span class="string">'tanghao'</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr.toString());    <span class="comment">//xhh,yql,hwq,xiaowu,tanghao</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="11-unshift"><a href="#11-unshift" class="headerlink" title="11.unshift()"></a>11.unshift()</h5><p>unshift()方法向数组的开头添加一个或更多元素，并返回新的长度。</p>
+<p>语法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">arr.unshift(element1...elementn)</span><br></pre></td></tr></table></figure>
+
+<p>代码案例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">     <span class="keyword">var</span> arr = <span class="keyword">new</span> <span class="built_in">Array</span>(<span class="number">3</span>);</span><br><span class="line">    arr[<span class="number">0</span>] = <span class="string">'xhh'</span>,</span><br><span class="line">    arr[<span class="number">1</span>] = <span class="string">'yql'</span>,</span><br><span class="line">    arr[<span class="number">2</span>] = <span class="string">'hwq'</span></span><br><span class="line">    <span class="keyword">var</span> length = arr.unshift(<span class="string">'tangsan'</span>,<span class="string">'xiaowu'</span>)</span><br><span class="line">    <span class="built_in">console</span>.log(length);    <span class="comment">//5</span></span><br><span class="line">    <span class="built_in">console</span>.log(arr);     <span class="comment">//"tangsan", "xiaowu", "xhh", "yql", "hwq"</span></span><br><span class="line">&lt;<span class="regexp">/script&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://xhh460.github.io">小灰灰</a></p><p> <span>Link:  </span><a href="http://xhh460.github.io/2020/07/01/javascript%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E5%8F%8A%E6%96%B9%E6%B3%95/">http://xhh460.github.io/2020/07/01/javascript%E5%86%85%E7%BD%AE%E5%AF%B9%E8%B1%A1%E5%8F%8A%E6%96%B9%E6%B3%95/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed under <a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/3.0" target="_blank">CC BY-NC-SA 3.0</a> unless stating additionally.</span></p></div><div class="post-paginator"><a class="nextSlogan" href="/2020/07/01/js%E6%AD%A3%E5%88%99/" title="js正则"><span>NextPost ></span><br><span class="nextTitle">js正则</span></a><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#JavaScript内置对象及方法"><span class="toc-number">1.</span> <span class="toc-text">JavaScript内置对象及方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-JS-Array"><span class="toc-number">1.0.1.</span> <span class="toc-text">1.JS Array</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Array对象属性"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">Array对象属性</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-length"><span class="toc-number">1.0.1.1.1.</span> <span class="toc-text">1.length</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Array对象方法"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">Array对象方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-contact"><span class="toc-number">1.0.1.2.1.</span> <span class="toc-text">1.contact()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-join"><span class="toc-number">1.0.1.2.2.</span> <span class="toc-text">2.join()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-pop"><span class="toc-number">1.0.1.2.3.</span> <span class="toc-text">3.pop()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-push"><span class="toc-number">1.0.1.2.4.</span> <span class="toc-text">4.push()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-reverse"><span class="toc-number">1.0.1.2.5.</span> <span class="toc-text">5.reverse()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-shift"><span class="toc-number">1.0.1.2.6.</span> <span class="toc-text">6.shift()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-slice"><span class="toc-number">1.0.1.2.7.</span> <span class="toc-text">7.slice()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-sort"><span class="toc-number">1.0.1.2.8.</span> <span class="toc-text">8.sort()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#9-splice"><span class="toc-number">1.0.1.2.9.</span> <span class="toc-text">9.splice()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10-toString"><span class="toc-number">1.0.1.2.10.</span> <span class="toc-text">10.toString()</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11-unshift"><span class="toc-number">1.0.1.2.11.</span> <span class="toc-text">11.unshift()</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>
