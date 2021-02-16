@@ -262,6 +262,7 @@
 
 
 <h4 id="请求转发与重定向"><a href="#请求转发与重定向" class="headerlink" title="请求转发与重定向"></a>请求转发与重定向</h4><p>​    通过HttpServletRequest获取到的RequestDispathcer对象的forword()方法，可以完成请求转发功能。而通过HttpServletResponse的sendRedirect()方法，可以完成重定向功能。</p>
+<p><strong>重定向不保留第一次请求时的数据</strong></p>
 <p><img src="/images/Servlet/image-20201021113129796.png" alt="image-20201021113129796"></p>
 <p><img src="/images/Servlet/image-20201021113347155.png" alt="image-20201021113347155"></p>
 <p>​        <strong>请求转发和请求重定向均指的是请求的跳转方式。用户提交请求需要访问服务器的资源1，而资源1又需要访问资源2，那么由资源1到资源2的跳转有两种方式：请求转发与重定向。</strong></p>
